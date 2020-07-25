@@ -1,0 +1,28 @@
+{
+    "name": "cobraprojects/larashop",
+    "description": "Simple online store for laravel",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Mohamed Melouk",
+            "email": "m.melouk@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "CobraProjects\\LaraShop\\": "src/"
+        }
+    },
+    "require-dev": {
+        "orchestra/testbench": "^6.0@dev"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "CobraProjects\\LaraShop\\LaraShopServiceProvider"
+            ]
+        }
+    }
+}
