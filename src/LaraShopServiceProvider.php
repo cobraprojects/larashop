@@ -10,10 +10,7 @@ class LaraShopServiceProvider extends ServiceProvider
 {
     public function boot()
     {
-        $this->mergeConfigFrom(__DIR__ . '/../config/larashop.php', 'larashop');
-        $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
-        $this->loadViewsFrom(__DIR__ . '/views', 'larashop');
-        $this->registerRoutes();
+        $this->loadThings();
 
         $this->publishThings();
     }
@@ -21,6 +18,14 @@ class LaraShopServiceProvider extends ServiceProvider
     public function register()
     {
         # code...
+    }
+
+    protected function loadThings()
+    {
+        $this->mergeConfigFrom(__DIR__ . '/../config/larashop.php', 'larashop');
+        $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
+        $this->loadViewsFrom(__DIR__ . '/views', 'larashop');
+        $this->registerRoutes();
     }
 
     protected function registerRoutes()
@@ -58,5 +63,9 @@ class LaraShopServiceProvider extends ServiceProvider
             __DIR__ . '/../database/migrations' => database_path('migrations'),
             __DIR__ . '/views' => resource_path('views/vendor/larashop/'),
         ]);
+
+        $this->publishes([
+            __DIR__ . '/views' => resource_path('views/vendor/larashop/'),
+        ], 'larashop-views');
     }
 }
