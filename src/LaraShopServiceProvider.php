@@ -2,9 +2,10 @@
 
 namespace CobraProjects\LaraShop;
 
-use CobraProjects\LaraShop\LaraShop;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
+use CobraProjects\LaraShop\Facades\LaraShop;
+use CobraProjects\LaraShop\Console\Commands\Install;
 
 class LaraShopServiceProvider extends ServiceProvider
 {
@@ -13,6 +14,8 @@ class LaraShopServiceProvider extends ServiceProvider
         $this->loadThings();
 
         $this->publishThings();
+
+        $this->loadCommands();
     }
 
     public function register()
@@ -25,6 +28,8 @@ class LaraShopServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(__DIR__ . '/../config/larashop.php', 'larashop');
         $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
         $this->loadViewsFrom(__DIR__ . '/views', 'larashop');
+        $this->loadViewsFrom(__DIR__ . '/views-admin', 'multiauth');
+        $this->registerFacades();
         $this->registerRoutes();
     }
 
@@ -51,8 +56,9 @@ class LaraShopServiceProvider extends ServiceProvider
     {
         return [
             'prefix' => LaraShop::getAdminPrefix(),
+            'name' => 'admin.',
             'namespace' => 'CobraProjects\LaraShop\Http\Controllers\Admin',
-            'middleware' => ['web', config('larashop.admin_middleware')]
+            'middleware' => ['web', config('larashop.admin_middleware')],
         ];
     }
 
@@ -62,10 +68,36 @@ class LaraShopServiceProvider extends ServiceProvider
             __DIR__ . '/../config/larashop.php' => config_path('larashop.php'),
             __DIR__ . '/../database/migrations' => database_path('migrations'),
             __DIR__ . '/views' => resource_path('views/vendor/larashop/'),
+            __DIR__ . '/views-admin' => resource_path('views/vendor/multiauth/'),
         ]);
 
         $this->publishes([
+            __DIR__ . '/../config/larashop.php' => config_path('larashop.php'),
+        ], 'larashop-config');
+
+        $this->publishes([
+            __DIR__ . '/../database/migrations' => database_path('migrations'),
+        ], 'larashop-migrations');
+
+        $this->publishes([
             __DIR__ . '/views' => resource_path('views/vendor/larashop/'),
+            __DIR__ . '/views-admin' => resource_path('views/vendor/multiauth/'),
         ], 'larashop-views');
+    }
+
+    protected function registerFacades()
+    {
+        $this->app->singleton('LaraShop', function ($app) {
+            return new \CobraProjects\LaraShop\LaraShop();
+        });
+    }
+
+    protected function loadCommands()
+    {
+        if ($this->app->runningInConsole()) {
+            $this->commands([
+                Install::class,
+            ]);
+        }
     }
 }

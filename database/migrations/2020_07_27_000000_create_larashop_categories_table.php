@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateProductTypeTable extends Migration
+class CreateLarashopCategoriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,11 @@ class CreateProductTypeTable extends Migration
      */
     public function up()
     {
-        Schema::create('product_types', function (Blueprint $table) {
+        Schema::create('larashop_categories', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->unsignedBigInteger('parent_id')->nullable();
+            $table->mediumText('description')->nullable();
             $table->timestamps();
         });
     }
@@ -27,6 +29,6 @@ class CreateProductTypeTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('product_types');
+        Schema::dropIfExists('categories');
     }
 }
