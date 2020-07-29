@@ -16,8 +16,10 @@ class CreateLarashopCategoriesTable extends Migration
         Schema::create('larashop_categories', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('slug');
             $table->unsignedBigInteger('parent_id')->nullable();
             $table->mediumText('description')->nullable();
+            $table->unsignedInteger('order')->default(1);
             $table->timestamps();
         });
     }

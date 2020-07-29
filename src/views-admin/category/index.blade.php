@@ -1,5 +1,5 @@
 @extends('multiauth::adminLayouts.app')
-@section('title', 'تعديل مستخدم')
+@section('title', 'الأقسام')
 @section('breadcrumb')
 <a class="breadcrumb-item" href="{{ route('admin.home') }}">لوحة التحكم</a>
 <a class="breadcrumb-item" href="">المتجر</a>
@@ -13,7 +13,7 @@
 @section('pagetitle','الأقسام')
 @section('content')
 <div class="container-fluid">
-    <a href="{{ route(LaraShop::getAdminRouteName().'.category.create') }}" class="btn btn-outline-success">
+    <a href="{{ route(LaraShop::adminName().'.category.create') }}" class="btn btn-outline-success">
         <i class="fa fa-plus-circle"></i>
         أضافة قسم
     </a>
@@ -39,13 +39,13 @@
                                     <td class="fit">{{ $category->id }}</td>
                                     <td class="">{{ $category->name }}</td>
                                     <td class="">{{ @$category->parent->name }}</td>
-                                    <td class="fit">{{ $category->media->first()? $category->media->first()('thumb') : '' }}</td>
+                                    <td class="fit">{{ $category->media->first()? $category->media->first()('thumb')->attributes(['class'=>'img-fluid img-thumbnail']) : '' }}</td>
                                     <td class="fit">
-                                        <form action="{{ route(LaraShop::getAdminRouteName().'.category.destroy', $category->id) }}" method="POST">
+                                        <form action="{{ route(LaraShop::adminName().'.category.destroy', $category->id) }}" method="POST">
                                             @csrf
                                             @method('DELETE')
                                             @permitTo('UpdateLarashopCategory')
-                                            <a href="{{ route(LaraShop::getAdminRouteName().'.category.edit',[$category->id]) }}" class="text-info">
+                                            <a href="{{ route(LaraShop::adminName().'.category.edit',[$category->id]) }}" class="text-info">
                                                 <i class="fa fa-pencil"></i>
                                             </a>
                                             <span class="mx-1"></span>

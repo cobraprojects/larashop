@@ -11,6 +11,8 @@ class LarashopCategory extends Model implements HasMedia
     use InteractsWithMedia;
 
     protected $guarded = [];
+    //protected $with = ['media', 'parent'];
+    //protected $withCount = ['products'];
 
     public function registerMediaCollections(): void
     {
@@ -28,5 +30,21 @@ class LarashopCategory extends Model implements HasMedia
             ->width(config('larashop.medium_images.category.width'))
             ->height(config('larashop.medium_images.category.height'))
             ->nonOptimized();
+    }
+
+    public function parent()
+    {
+        return $this->belongsTo('CobraProjects\LaraShop\Models\LarashopCategory', 'parent_id', 'id');
+    }
+
+    public function childs()
+    {
+        return $this->hasMany('CobraProjects\LaraShop\Models\LarashopCategory', 'parent_id', 'id');
+    }
+
+
+    public function getHasChildsAttribute()
+    {
+        return $this->childs->count();
     }
 }

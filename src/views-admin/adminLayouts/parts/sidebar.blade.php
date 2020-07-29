@@ -39,7 +39,7 @@
         @endadmin
 
         <li class="nav-item">
-            <a href="" class="nav-link with-sub {{ $routeName->contains(LaraShop::getShopRouteName()) ? 'active' : '' }}">
+            <a href="" class="nav-link with-sub {{ $routeName->contains(LaraShop::getShopRouteName ()) ? 'active' : '' }}">
                 <i class="fa fa-shopping-bag"></i>
                 <span>المتجر</span>
             </a>

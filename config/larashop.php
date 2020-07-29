@@ -9,25 +9,25 @@ return [
     # Images settings
     'thumbnails' => [
         'category' => [
-            'width' => '300px',
-            'height' => '200px'
+            'width' => 300,
+            'height' => 200
         ],
 
         'product' => [
-            'width' => '300px',
-            'height' => '200px'
+            'width' => 300,
+            'height' => 200
         ],
     ],
 
     'medium_images' => [
         'category' => [
-            'width' => '600px',
-            'height' => '400px'
+            'width' => 600,
+            'height' => 400
         ],
 
         'product' => [
-            'width' => '600px',
-            'height' => '400px'
+            'width' => 600,
+            'height' => 400
         ],
     ],
 ];
