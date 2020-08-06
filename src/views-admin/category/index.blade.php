@@ -80,7 +80,7 @@
                 "stateSave": true,
                 "autoWidth": false,
                 "language": {
-                    "url": '{{ asset('lang/ar/DataTable.json') }}'
+                    "url": '{{ asset('vendor/multiauth/lang/ar/DataTable.json') }}'
                 },
                 "columnDefs": [
                     { sortable: false, targets: ['noSort'] },

@@ -42,6 +42,10 @@ class LarashopCategory extends Model implements HasMedia
         return $this->hasMany('CobraProjects\LaraShop\Models\LarashopCategory', 'parent_id', 'id');
     }
 
+    public function larashopProducts()
+    {
+        return $this->belongsToMany('CobraProjects\LaraShop\Models\LarashopProduct');
+    }
 
     public function getHasChildsAttribute()
     {

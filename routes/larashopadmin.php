@@ -1,6 +1,7 @@
 <?php
 
 use CobraProjects\LaraShop\Facades\LaraShop;
+use CobraProjects\LaraShop\Models\LarashopProduct;
 
 Route::name(LaraShop::adminName() . '.')->group(function () {
 
@@ -12,5 +13,15 @@ Route::name(LaraShop::adminName() . '.')->group(function () {
         Route::post('/', 'LarashopCategoryController@store')->name('store');
         Route::put('/{larashopCategory}', 'LarashopCategoryController@update')->name('update');
         Route::delete('/{larashopCategory}', 'LarashopCategoryController@destroy')->name('destroy');
+    });
+
+    // Categories
+    Route::name('product.')->prefix('product')->group(function () {
+        Route::get('/', 'LarashopProductController@index')->name('index');
+        Route::get('/create', 'LarashopProductController@create')->name('create');
+        Route::get('/{larashopProduct}/edit', 'LarashopProductController@edit')->name('edit');
+        Route::post('/', 'LarashopProductController@store')->name('store');
+        Route::put('/{larashopProduct}', 'LarashopProductController@update')->name('update');
+        Route::delete('/{larashopProduct}', 'LarashopProductController@destroy')->name('destroy');
     });
 });

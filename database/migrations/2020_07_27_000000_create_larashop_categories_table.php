@@ -31,6 +31,6 @@ class CreateLarashopCategoriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('categories');
+        Schema::dropIfExists('larashop_categories');
     }
 }
