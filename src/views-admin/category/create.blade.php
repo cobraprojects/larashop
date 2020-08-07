@@ -41,9 +41,7 @@
                             <label for="parent_id" class="form-control-label">يتبع قسم</label>
                             <select class="form-control" id="parent_id" name="parent_id">
                                 <option value="">قسم رئيسي</option>
-                                @foreach ($categories as $cat)
-                                <option value="{{ $cat->id }}">{{ $cat->name }}</option>
-                                @endforeach
+                                {{ Larashop::getCategoriesSelect(old('parent_id')) }}
                             </select>
                             @error('parent_id')
                             <p class="text-danger">{{ $message }}</p>

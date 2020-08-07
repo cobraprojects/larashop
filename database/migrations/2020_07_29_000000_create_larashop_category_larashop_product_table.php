@@ -15,8 +15,8 @@ class CreateLarashopCategoryLarashopProductTable extends Migration
     {
         Schema::create('larashop_category_larashop_product', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('larashop_category_id')->constrained();
-            $table->foreignId('larashop_product_id')->constrained();
+            $table->foreignId('larashop_category_id')->constrained()->onDelete('cascade');
+            $table->foreignId('larashop_product_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

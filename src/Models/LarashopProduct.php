@@ -11,7 +11,7 @@ class LarashopProduct extends Model implements HasMedia
 {
     use InteractsWithMedia;
 
-    protected $guarded = [];
+    protected $guarded = ['categories', 'image', 'images'];
     //protected $with = ['media', 'parent'];
     //protected $withCount = ['products'];
 

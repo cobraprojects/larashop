@@ -2,7 +2,9 @@
 
 namespace CobraProjects\LaraShop\Console\Commands;
 
+use CobraProjects\Multiauth\Model\Permission;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Artisan;
 
 class Install extends Command
@@ -58,11 +60,15 @@ class Install extends Command
         $this->info(Artisan::output());
 
         $this->warn('D. Publishing Medialibrary Migrations');
-        Artisan::call('vendor:publish', [
-            '--provider' => 'Spatie\\MediaLibrary\\MediaLibraryServiceProvider',
-            '--tag' => 'migrations'
-        ]);
-        $this->info(Artisan::output());
+        if (!Schema::hasTable('media')) {
+            Artisan::call('vendor:publish', [
+                '--provider' => 'Spatie\\MediaLibrary\\MediaLibraryServiceProvider',
+                '--tag' => 'migrations'
+            ]);
+            $this->info(Artisan::output());
+        } else {
+            $this->info('table media already exists.');
+        }
 
         $this->warn('E. Publishing Views');
         Artisan::call('vendor:publish --tag=larashop-views');
@@ -74,5 +80,21 @@ class Install extends Command
         $this->warn('F. Running Migrations');
         Artisan::call('migrate');
         $this->info(Artisan::output());
+
+        $this->warn('G. seeding permissions');
+        if (!$this->permissionExists('LarashopCategory')) {
+            Artisan::call('multiauth:permissions LarashopCategory');
+            $this->info(Artisan::output());
+        }
+
+        if (!$this->permissionExists('LarashopProduct')) {
+            Artisan::call('multiauth:permissions LarashopProduct');
+            $this->info(Artisan::output());
+        }
+    }
+
+    public function permissionExists($permission)
+    {
+        return Permission::where('parent', $permission)->exists();
     }
 }

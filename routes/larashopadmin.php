@@ -1,8 +1,5 @@
 <?php
 
-use CobraProjects\LaraShop\Facades\LaraShop;
-use CobraProjects\LaraShop\Models\LarashopProduct;
-
 Route::name(LaraShop::adminName() . '.')->group(function () {
 
     // Categories
@@ -23,5 +20,6 @@ Route::name(LaraShop::adminName() . '.')->group(function () {
         Route::post('/', 'LarashopProductController@store')->name('store');
         Route::put('/{larashopProduct}', 'LarashopProductController@update')->name('update');
         Route::delete('/{larashopProduct}', 'LarashopProductController@destroy')->name('destroy');
+        Route::get('/media/{media}', 'LarashopProductController@deleteMedia')->name('media.delete');
     });
 });

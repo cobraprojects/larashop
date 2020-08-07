@@ -44,13 +44,22 @@
                 <span>المتجر</span>
             </a>
             <ul class="nav-sub">
+                @permitTo('ReadLarashopCategory')
                 <li class="nav-item">
                     <a href="{{ route('admin.shop.category.index') }}" class="nav-link {{ $routeName->contains('category') ? 'active' : '' }}">
                         <i class="fa fa-bars"></i>
                         <span>الأقسام</span>
                     </a>
                 </li>
-
+                @endpermitTo
+                @permitTo('ReadLarashopProduct')
+                <li class="nav-item">
+                    <a href="{{ route('admin.shop.product.index') }}" class="nav-link {{ $routeName->contains('product') ? 'active' : '' }}">
+                        <i class="fa fa-bars"></i>
+                        <span>المنتجات</span>
+                    </a>
+                </li>
+                @endpermitTo
             </ul>
         </li><!-- nav-item -->
     </ul>

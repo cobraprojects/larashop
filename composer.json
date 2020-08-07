@@ -10,7 +10,7 @@
     ],
     "minimum-stability": "dev",
     "require": {
-        "cobraprojects/laravel-multiauth": "^1.1",
+        "cobraprojects/laravel-multiauth": "^1.2",
         "spatie/laravel-medialibrary": "^8.0.0"
     },
     "autoload": {
