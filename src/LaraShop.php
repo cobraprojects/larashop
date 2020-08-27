@@ -56,4 +56,24 @@ class LaraShop
             $this->getCategoriesSelect($select, $d['id'], $level + 1);
         }
     }
+
+    public function getCategoryByParent($parent = null)
+    {
+        return LarashopCategory::where('parent_id', $parent)->orderBy('order', 'ASC')->get();
+    }
+
+    public function getCategoryById($id)
+    {
+        return LarashopCategory::findOrFail('id', $id);
+    }
+
+    public function getCategoryProducts(LarashopCategory $larashopCategory, $limit = 12)
+    {
+        return $larashopCategory->larashopProducts()->paginate($limit);
+    }
+
+    public function getProductById($id)
+    {
+        return LarashopProduct::findOrFail($id);
+    }
 }

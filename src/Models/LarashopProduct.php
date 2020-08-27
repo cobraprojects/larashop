@@ -4,7 +4,6 @@ namespace CobraProjects\LaraShop\Models;
 
 use Spatie\MediaLibrary\HasMedia;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
 class LarashopProduct extends Model implements HasMedia
@@ -12,6 +11,8 @@ class LarashopProduct extends Model implements HasMedia
     use InteractsWithMedia;
 
     protected $guarded = ['categories', 'image', 'images'];
+
+    protected $with = ['media'];
     //protected $with = ['media', 'parent'];
     //protected $withCount = ['products'];
 
@@ -56,5 +57,20 @@ class LarashopProduct extends Model implements HasMedia
     public function getHasChildsAttribute()
     {
         return $this->childs->count();
+    }
+
+    public function getDefaultImageAttribute()
+    {
+        return $this->getFirstMedia('main');
+    }
+
+    public function getDefaultImageThumbAttribute()
+    {
+        return $this->getFirstMedia('main')('thumb');
+    }
+
+    public function getDefaultImageMediumAttribute()
+    {
+        return $this->getFirstMedia('main')('medium');
     }
 }
