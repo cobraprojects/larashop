@@ -45,6 +45,9 @@
                                     <label for="description" class="form-control-label">وصف المنتج</label>
                                     <textarea type="text" class="editor form-control" id="description"
                                         name="description">{{ old('description', $larashopProduct->description) }}</textarea>
+                                    @error('description')
+                                    <p class="text-danger">{{ $message }}</p>
+                                    @enderror
                                 </div>
 
                                 <div class="form-group">
