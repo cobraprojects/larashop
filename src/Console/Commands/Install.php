@@ -53,10 +53,18 @@ class Install extends Command
 
         $this->warn('B. Publishing Configurations');
         Artisan::call('vendor:publish --tag=larashop-config');
+        Artisan::call('vendor:publish', [
+            '--provider' => 'Gloudemans\Shoppingcart\ShoppingcartServiceProvider',
+            '--tag' => 'config'
+        ]);
         $this->info(Artisan::output());
 
         $this->warn('C. Publishing Migrations');
         Artisan::call('vendor:publish --tag=larashop-migrations');
+        Artisan::call('vendor:publish', [
+            '--provider' => 'Gloudemans\Shoppingcart\ShoppingcartServiceProvider',
+            '--tag' => 'migrations'
+        ]);
         $this->info(Artisan::output());
 
         $this->warn('D. Publishing Medialibrary Migrations');

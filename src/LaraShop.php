@@ -2,10 +2,11 @@
 
 namespace CobraProjects\LaraShop;
 
-use CobraProjects\LaraShop\Models\LarashopCategory;
-use CobraProjects\LaraShop\Models\LarashopProduct;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Cache;
+use Gloudemans\Shoppingcart\Facades\Cart;
+use CobraProjects\LaraShop\Models\LarashopProduct;
+use CobraProjects\LaraShop\Models\LarashopCategory;
 
 class LaraShop
 {
@@ -75,5 +76,80 @@ class LaraShop
     public function getProductById($id)
     {
         return LarashopProduct::findOrFail($id);
+    }
+
+    public function addToCart(LarashopProduct $larashopProduct, $qty = 1, $options = [])
+    {
+        Cart::add($larashopProduct, $qty, $options);
+    }
+
+    public function addToWishList(LarashopProduct $larashopProduct, $qty = 1, $options = [])
+    {
+        Cart::Instance('wishlist')->add($larashopProduct, $qty, $options);
+    }
+
+    public function moveToCart($rowId)
+    {
+        $product =  Cart::get($rowId);
+        $this->addToCart($product);
+        $this->removefromWithList($rowId);
+    }
+
+    public function moveToWithList($rowId)
+    {
+        $product =  Cart::get($rowId);
+        $this->addToWishList($product);
+        $this->removefromCart($rowId);
+    }
+
+    public function updateQty($rowId, $qty)
+    {
+        Cart::update($rowId, $qty);
+    }
+
+    public function removefromCart($rowId)
+    {
+        Cart::remove($rowId);
+    }
+
+    public function removefromWithList($rowId)
+    {
+        Cart::Instance('wishlist')->remove($rowId);
+    }
+
+    public function cartItems($instance = 'default')
+    {
+        return Cart::Instance($instance)->content();
+    }
+
+    public function storeCart(User $user)
+    {
+        Cart::store($user->id);
+        Cart::Instance('wishlist')->store($user->id);
+    }
+
+    public function restoreCart(User $user)
+    {
+        Cart::restore($user->id);
+        Cart::Instance('wishlist')->restore($user->id);
+    }
+
+    public function deleteCart(User $user)
+    {
+        Cart::erase($user->id);
+    }
+
+    public function cartTotal()
+    {
+        Cart::total();
+    }
+
+    public function cartLogin(User $user)
+    {
+        $old = Cart::content();
+        Cart::restore($user->id);
+        $old->merge(Cart::content());
+        Cart::store($user->id);
+        Cart::content();
     }
 }

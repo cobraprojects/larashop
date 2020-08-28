@@ -5,8 +5,9 @@ namespace CobraProjects\LaraShop\Models;
 use Spatie\MediaLibrary\HasMedia;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Gloudemans\Shoppingcart\Contracts\Buyable;
 
-class LarashopProduct extends Model implements HasMedia
+class LarashopProduct extends Model implements HasMedia, Buyable
 {
     use InteractsWithMedia;
 
@@ -36,6 +37,24 @@ class LarashopProduct extends Model implements HasMedia
             ->width(config('larashop.medium_images.product.width'))
             ->height(config('larashop.medium_images.product.height'))
             ->nonOptimized();
+    }
+
+    public function getBuyableIdentifier($options = null)
+    {
+        return $this->id;
+    }
+    public function getBuyableDescription($options = null)
+    {
+        return $this->name;
+    }
+    public function getBuyablePrice($options = null)
+    {
+        return $this->price;
+    }
+
+    public function getBuyableWeight()
+    {
+        return $this->weight;
     }
 
     public function parent()
