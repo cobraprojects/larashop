@@ -69,7 +69,7 @@ class LaraShop
 
     public function getCategoryProducts(LarashopCategory $larashopCategory, $limit = 12)
     {
-        return $larashopCategory->larashopProducts()->paginate($limit);
+        return $larashopCategory->larashopProducts()->orderBy('id', 'DESC')->paginate($limit);
     }
 
     public function getProductById($id)
