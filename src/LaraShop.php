@@ -141,7 +141,7 @@ class LaraShop
 
     public function cartTotal()
     {
-        Cart::total();
+        return Cart::total();
     }
 
     public function cartLogin(User $user)
