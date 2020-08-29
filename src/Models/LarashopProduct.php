@@ -52,9 +52,9 @@ class LarashopProduct extends Model implements HasMedia, Buyable
         return $this->price;
     }
 
-    public function getBuyableWeight()
+    public function getBuyableWeight($options = NULL)
     {
-        return $this->weight;
+        return 0;
     }
 
     public function parent()
