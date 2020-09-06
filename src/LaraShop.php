@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Cache;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use CobraProjects\LaraShop\Models\LarashopProduct;
 use CobraProjects\LaraShop\Models\LarashopCategory;
+use App\User;
 
 class LaraShop
 {
@@ -60,7 +61,12 @@ class LaraShop
 
     public function getCategoryByParent($parent = null)
     {
-        return LarashopCategory::where('parent_id', $parent)->orderBy('order', 'ASC')->get();
+        return LarashopCategory::where('parent_id', $parent)->withCount('larashopProducts')->orderBy('order', 'ASC')->get();
+    }
+
+    public function getSubCategoriesFilter(array $categories)
+    {
+        return LarashopCategory::whereIn('parent_id', $categories)->withCount('larashopProducts')->orderBy('order', 'ASC')->get();
     }
 
     public function getCategoryById($id)
@@ -71,6 +77,11 @@ class LaraShop
     public function getCategoryProducts(LarashopCategory $larashopCategory, $limit = 12)
     {
         return $larashopCategory->larashopProducts()->orderBy('id', 'DESC')->paginate($limit);
+    }
+
+    public function getProductsInCategories(array $categories, $limit = 12)
+    {
+        return LarashopProduct::whereHas('larashopCategories', fn ($q) => $q->whereIn('larashop_categories.id', $categories))->orderBy('id', 'DESC')->paginate($limit);
     }
 
     public function getProductById($id)
