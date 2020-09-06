@@ -71,7 +71,7 @@ class LaraShop
 
     public function getCategoryById($id)
     {
-        return LarashopCategory::findOrFail('id', $id);
+        return LarashopCategory::findOrFail($id);
     }
 
     public function getCategoryProducts(LarashopCategory $larashopCategory, $limit = 12)
