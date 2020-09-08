@@ -3,11 +3,13 @@
 namespace CobraProjects\LaraShop\Models;
 
 use Spatie\MediaLibrary\HasMedia;
+use Spatie\Searchable\Searchable;
+use Spatie\Searchable\SearchResult;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Gloudemans\Shoppingcart\Contracts\Buyable;
 
-class LarashopProduct extends Model implements HasMedia, Buyable
+class LarashopProduct extends Model implements HasMedia, Buyable, Searchable
 {
     use InteractsWithMedia;
 
@@ -37,6 +39,22 @@ class LarashopProduct extends Model implements HasMedia, Buyable
             ->width(config('larashop.medium_images.product.width'))
             ->height(config('larashop.medium_images.product.height'))
             ->nonOptimized();
+    }
+
+    public function getSearchResult(): SearchResult
+    {
+        $url = route('store.product.show', [$this->larashopCategories->min('id'), $this->slug]);
+
+        return new \Spatie\Searchable\SearchResult(
+            $this,
+            $this->name,
+            $url
+        );
+    }
+
+    public function scopeShown($query)
+    {
+        return $query->where('hidden', 0);
     }
 
     public function getBuyableIdentifier($options = null)
