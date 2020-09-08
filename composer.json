@@ -12,7 +12,8 @@
     "require": {
         "cobraprojects/laravel-multiauth": "1.*",
         "spatie/laravel-medialibrary": "^8.0.0",
-        "bumbummen99/shoppingcart": "dev-master"
+        "bumbummen99/shoppingcart": "dev-master",
+        "spatie/laravel-searchable": "dev-master"
     },
     "autoload": {
         "psr-4": {
