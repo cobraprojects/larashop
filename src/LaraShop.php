@@ -150,6 +150,11 @@ class LaraShop
         Cart::erase($user->id);
     }
 
+    public function emptyCart()
+    {
+        Cart::destroy();
+    }
+
     public function cartTotal()
     {
         return Cart::total();
