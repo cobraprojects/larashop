@@ -42,7 +42,7 @@ class LarashopProductController extends Controller
             'has_discount' => 'nullable',
         ]);
 
-        $product = LarashopProduct::create($data);
+        $product = LarashopProduct::create($request->all());
 
         if ($request->image) {
             $product->addMediaFromRequest('image')->toMediaCollection('main');
@@ -86,7 +86,7 @@ class LarashopProductController extends Controller
             'has_discount' => 'nullable',
         ]);
 
-        $larashopProduct->update($data);
+        $larashopProduct->update($request->all());
 
         if ($request->image) {
             $larashopProduct->addMediaFromRequest('image')->toMediaCollection('main');
