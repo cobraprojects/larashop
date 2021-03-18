@@ -114,6 +114,8 @@ class LarashopProductController extends Controller
         }
         $larashopProduct->delete();
 
+        Cache::forget('allProducts');
+
         return back()->with('success', 'تم الحذف بنجاح');
     }
 
