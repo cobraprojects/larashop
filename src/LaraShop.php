@@ -76,12 +76,12 @@ class LaraShop
 
     public function getCategoryProducts(LarashopCategory $larashopCategory, $limit = 12)
     {
-        return $larashopCategory->larashopProducts()->orderBy('id', 'DESC')->paginate($limit);
+        return $larashopCategory->larashopProducts()->where('hidden', 0)->orderBy('id', 'DESC')->paginate($limit);
     }
 
     public function getProductsInCategories(array $categories, $limit = 12)
     {
-        return LarashopProduct::whereHas('larashopCategories', fn ($q) => $q->whereIn('larashop_categories.id', $categories))->orderBy('id', 'DESC')->paginate($limit);
+        return LarashopProduct::where('hidden', 0)->whereHas('larashopCategories', fn ($q) => $q->whereIn('larashop_categories.id', $categories))->orderBy('id', 'DESC')->paginate($limit);
     }
 
     public function getProductById($id)
