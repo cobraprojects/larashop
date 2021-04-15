@@ -52,6 +52,14 @@
                     </a>
                 </li>
                 @endpermitTo
+                @permitTo('ReadLarashopBrand')
+                <li class="nav-item">
+                    <a href="{{ route('admin.shop.brand.index') }}" class="nav-link {{ $routeName->contains('brand') ? 'active' : '' }}">
+                        <i class="fa fa-bars"></i>
+                        <span>البراندات</span>
+                    </a>
+                </li>
+                @endpermitTo
                 @permitTo('ReadLarashopProduct')
                 <li class="nav-item">
                     <a href="{{ route('admin.shop.product.index') }}" class="nav-link {{ $routeName->contains('product') ? 'active' : '' }}">

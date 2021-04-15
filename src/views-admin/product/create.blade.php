@@ -92,6 +92,19 @@
                                     <p class="text-danger">{{ $message }}</p>
                                     @enderror
                                 </div>
+
+                                <div class="form-group">
+                                    <label for="brand_id" class="form-control-label">اسم البراند</label>
+                                    <select class="form-control" id="brand_id" name="brand_id">
+                                        <option value="">اختر براند</option>
+                                        @foreach ($brands as $brand)
+                                        <option value="{{ $brand->id }}" {{ $brand->id == old('brand_id') ? 'selected' : '' }}>{{ $brand->name }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('brand_id')
+                                    <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </div>
                             </div>
                         </div>
 

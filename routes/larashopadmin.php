@@ -12,7 +12,17 @@ Route::name(LaraShop::adminName() . '.')->group(function () {
         Route::delete('/{larashopCategory}', 'LarashopCategoryController@destroy')->name('destroy');
     });
 
-    // Categories
+    // Brands
+    Route::name('brand.')->prefix('brand')->group(function () {
+        Route::get('/', 'LarashopBrandController@index')->name('index');
+        Route::get('/create', 'LarashopBrandController@create')->name('create');
+        Route::get('/{larashopBrand}/edit', 'LarashopBrandController@edit')->name('edit');
+        Route::post('/', 'LarashopBrandController@store')->name('store');
+        Route::put('/{larashopBrand}', 'LarashopBrandController@update')->name('update');
+        Route::delete('/{larashopBrand}', 'LarashopBrandController@destroy')->name('destroy');
+    });
+
+    // Products
     Route::name('product.')->prefix('product')->group(function () {
         Route::get('/', 'LarashopProductController@index')->name('index');
         Route::get('/create', 'LarashopProductController@create')->name('create');

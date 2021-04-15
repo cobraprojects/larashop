@@ -7,6 +7,7 @@ use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Cache;
 use CobraProjects\LaraShop\Facades\LaraShop;
 use CobraProjects\LaraShop\Models\LarashopProduct;
+use CobraProjects\LaraShop\Models\LarashopBrand;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class LarashopProductController extends Controller
@@ -20,8 +21,9 @@ class LarashopProductController extends Controller
     public function create()
     {
         $categories = LaraShop::getAllCategories();
+        $brands = LaraShopBrand::cursor();
         $order = $categories->max('order') + 1;
-        return view('multiauth::product.create', compact('categories', 'order'));
+        return view('multiauth::product.create', compact('categories', 'order', 'brands'));
     }
 
     public function store(Request $request)
@@ -40,9 +42,10 @@ class LarashopProductController extends Controller
             'new' => 'nullable',
             'featured' => 'nullable',
             'has_discount' => 'nullable',
+            'brand_id' => 'nullable'
         ]);
 
-        $product = LarashopProduct::create($request->all());
+        $product = LarashopProduct::create($data);
 
         if ($request->image) {
             $product->addMediaFromRequest('image')->toMediaCollection('main');
@@ -65,7 +68,8 @@ class LarashopProductController extends Controller
     public function edit(LarashopProduct $larashopProduct)
     {
         $categories = LaraShop::getAllCategories();
-        return view('multiauth::product.edit', compact('categories', 'larashopProduct'));
+        $brands = LaraShopBrand::cursor();
+        return view('multiauth::product.edit', compact('categories', 'larashopProduct', 'brands'));
     }
 
     public function update(Request $request, LarashopProduct $larashopProduct)
@@ -84,9 +88,10 @@ class LarashopProductController extends Controller
             'new' => 'nullable',
             'featured' => 'nullable',
             'has_discount' => 'nullable',
+            'brand_id' => 'nullable',
         ]);
 
-        $larashopProduct->update($request->all());
+        $larashopProduct->update($data);
 
         if ($request->image) {
             $larashopProduct->addMediaFromRequest('image')->toMediaCollection('main');

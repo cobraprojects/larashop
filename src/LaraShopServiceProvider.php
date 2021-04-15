@@ -67,7 +67,6 @@ class LaraShopServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__ . '/../config/larashop.php' => config_path('larashop.php'),
             __DIR__ . '/../database/migrations' => database_path('migrations'),
-            __DIR__ . '/views' => resource_path('views/vendor/larashop/'),
             __DIR__ . '/views-admin' => resource_path('views/vendor/multiauth/'),
         ]);
 

@@ -8,6 +8,7 @@ use Spatie\Searchable\SearchResult;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Gloudemans\Shoppingcart\Contracts\Buyable;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class LarashopProduct extends Model implements HasMedia, Buyable, Searchable
 {
@@ -88,6 +89,11 @@ class LarashopProduct extends Model implements HasMedia, Buyable, Searchable
     public function larashopCategories()
     {
         return $this->belongsToMany('CobraProjects\LaraShop\Models\LarashopCategory');
+    }
+
+    public function brand(): BelongsTo
+    {
+        return $this->belongsTo(LarashopBrand::class, 'brand_id', 'id');
     }
 
 
