@@ -99,6 +99,13 @@ class Install extends Command
             Artisan::call('multiauth:permissions LarashopProduct');
             $this->info(Artisan::output());
         }
+
+        if (!$this->permissionExists('LarashopBrand')) {
+            Artisan::call('multiauth:permissions LarashopBrand');
+            $this->info(Artisan::output());
+        }
+
+        Artisan::call('storage:link');
     }
 
     public function permissionExists($permission)
