@@ -85,7 +85,7 @@
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="categories" class="form-control-label">اختر الاقسام <span class="text-danger">*</span> </label>
-                                    <select class="form-control" id="categories" name="categories[]" multiple>
+                                    <select class="form-control select2" id="categories" name="categories[]" multiple>
                                         {{ Larashop::getCategoriesSelect(old('categories')) }}
                                     </select>
                                     @error('categories')
@@ -95,7 +95,7 @@
 
                                 <div class="form-group">
                                     <label for="brand_id" class="form-control-label">اسم البراند</label>
-                                    <select class="form-control" id="brand_id" name="brand_id">
+                                    <select class="form-control select2" id="brand_id" name="brand_id">
                                         <option value="">اختر براند</option>
                                         @foreach ($brands as $brand)
                                         <option value="{{ $brand->id }}" {{ $brand->id == old('brand_id') ? 'selected' : '' }}>{{ $brand->name }}</option>
@@ -218,7 +218,7 @@
         CKEDITOR.replace( this.id, options);
     });
 
-    $('#categories').select2({
+    $('.select2').select2({
         templateResult: formatResult,
     });
 </script>
