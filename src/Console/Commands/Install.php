@@ -105,6 +105,11 @@ class Install extends Command
             $this->info(Artisan::output());
         }
 
+        if (!$this->permissionExists('LarashopCoupon')) {
+            Artisan::call('multiauth:permissions LarashopCoupon');
+            $this->info(Artisan::output());
+        }
+
         Artisan::call('storage:link');
     }
 

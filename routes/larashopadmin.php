@@ -22,6 +22,16 @@ Route::name(LaraShop::adminName() . '.')->group(function () {
         Route::delete('/{larashopBrand}', 'LarashopBrandController@destroy')->name('destroy');
     });
 
+    // Coupons
+    Route::name('coupon.')->prefix('coupon')->group(function () {
+        Route::get('/', 'LarashopCouponController@index')->name('index');
+        Route::get('/create', 'LarashopCouponController@create')->name('create');
+        Route::get('/{larashopCoupon}/edit', 'LarashopCouponController@edit')->name('edit');
+        Route::post('/', 'LarashopCouponController@store')->name('store');
+        Route::put('/{larashopCoupon}', 'LarashopCouponController@update')->name('update');
+        Route::delete('/{larashopCoupon}', 'LarashopCouponController@destroy')->name('destroy');
+    });
+
     // Products
     Route::name('product.')->prefix('product')->group(function () {
         Route::get('/', 'LarashopProductController@index')->name('index');

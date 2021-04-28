@@ -2,7 +2,6 @@
 
 namespace CobraProjects\LaraShop\Http\Controllers\Admin;
 
-use CobraProjects\LaraShop\Facades\LaraShop;
 use CobraProjects\LaraShop\Models\LarashopBrand;
 use Illuminate\Routing\Controller;
 use Illuminate\Http\Request;

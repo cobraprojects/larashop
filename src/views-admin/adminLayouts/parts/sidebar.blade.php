@@ -55,7 +55,7 @@
                 @permitTo('ReadLarashopBrand')
                 <li class="nav-item">
                     <a href="{{ route('admin.shop.brand.index') }}" class="nav-link {{ $routeName->contains('brand') ? 'active' : '' }}">
-                        <i class="fa fa-bars"></i>
+                        <i class="fa fa-star"></i>
                         <span>البراندات</span>
                     </a>
                 </li>
@@ -63,8 +63,16 @@
                 @permitTo('ReadLarashopProduct')
                 <li class="nav-item">
                     <a href="{{ route('admin.shop.product.index') }}" class="nav-link {{ $routeName->contains('product') ? 'active' : '' }}">
-                        <i class="fa fa-bars"></i>
+                        <i class="fa fa-th"></i>
                         <span>المنتجات</span>
+                    </a>
+                </li>
+                @endpermitTo
+                @permitTo('ReadLarashopCoupon')
+                <li class="nav-item">
+                    <a href="{{ route('admin.shop.coupon.index') }}" class="nav-link {{ $routeName->contains('coupon') ? 'active' : '' }}">
+                        <i class="fa fa-gift"></i>
+                        <span>كوبونات الخصم</span>
                     </a>
                 </li>
                 @endpermitTo

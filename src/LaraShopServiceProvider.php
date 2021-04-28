@@ -27,7 +27,6 @@ class LaraShopServiceProvider extends ServiceProvider
     {
         $this->mergeConfigFrom(__DIR__ . '/../config/larashop.php', 'larashop');
         $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
-        $this->loadViewsFrom(__DIR__ . '/views', 'larashop');
         $this->loadViewsFrom(__DIR__ . '/views-admin', 'multiauth');
         $this->registerFacades();
         $this->registerRoutes();
@@ -79,7 +78,6 @@ class LaraShopServiceProvider extends ServiceProvider
         ], 'larashop-migrations');
 
         $this->publishes([
-            __DIR__ . '/views' => resource_path('views/vendor/larashop/'),
             __DIR__ . '/views-admin' => resource_path('views/vendor/multiauth/'),
         ], 'larashop-views');
     }
