@@ -45,19 +45,19 @@ class LarashopCouponController extends Controller
         return back()->with('success', 'تم الحفظ بنجاح');
     }
 
-    public function edit(LarashopCoupon $larashopCoupon)
+    public function edit(LarashopCoupon $coupon)
     {
         $categories = LarashopCategory::cursor();
         $products = LarashopProduct::where('hidden', 0)->cursor();
         $users = User::cursor();
 
-        return view('multiauth::coupon.edit', compact('larashopCoupon', 'categories', 'products', 'users'));
+        return view('multiauth::coupon.edit', compact('coupon', 'categories', 'products', 'users'));
     }
 
-    public function update(Request $request, LarashopCoupon $larashopCoupon)
+    public function update(Request $request, LarashopCoupon $coupon)
     {
         $data = $request->validate([
-            'code' => 'required|unique:larashop_coupons,code,' . $larashopCoupon->id,
+            'code' => 'required|unique:larashop_coupons,code,' . $coupon->id,
             'descripiton' => 'nullable',
             'coupon_type' => 'required',
             'amount' => 'required|numeric',
@@ -68,15 +68,15 @@ class LarashopCouponController extends Controller
             'data' => 'nullable',
         ]);
 
-        $larashopCoupon->update($data);
+        $coupon->update($data);
 
         return back()->with('success', 'تم الحفظ بنجاح');
     }
 
 
-    public function destroy(LarashopCoupon $larashopCoupon)
+    public function destroy(LarashopCoupon $coupon)
     {
-        $larashopCoupon->delete();
+        $coupon->delete();
 
         return back()->with('success', 'تم الحذف بنجاح');
     }

@@ -35,31 +35,31 @@ class LarashopBrandController extends Controller
         return back()->with('success', 'تم الحفظ بنجاح');
     }
 
-    public function edit(LarashopBrand $larashopBrand)
+    public function edit(LarashopBrand $brand)
     {
-        return view('multiauth::brand.edit', compact('larashopBrand'));
+        return view('multiauth::brand.edit', compact('brand'));
     }
 
-    public function update(Request $request, LarashopBrand $larashopBrand)
+    public function update(Request $request, LarashopBrand $brand)
     {
         $data = $request->validate([
             'name' => 'required',
-            'slug' => 'required|unique:larashop_categories,slug,' . $larashopBrand->id,
+            'slug' => 'required|unique:larashop_categories,slug,' . $brand->id,
         ]);
 
-        $larashopBrand->update($data);
+        $brand->update($data);
 
         if ($request->image) {
-            $larashopBrand->addMediaFromRequest('image')->toMediaCollection('image');
+            $brand->addMediaFromRequest('image')->toMediaCollection('image');
         }
 
         return back()->with('success', 'تم الحفظ بنجاح');
     }
 
 
-    public function destroy(LarashopBrand $larashopBrand)
+    public function destroy(LarashopBrand $brand)
     {
-        $larashopBrand->delete();
+        $brand->delete();
 
         return back()->with('success', 'تم الحذف بنجاح');
     }

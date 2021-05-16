@@ -12,7 +12,7 @@
 <div class="container-fluid">
     <div class="row mt-4">
         <div class="col-md-12">
-            <form action="{{ route(LaraShop::adminName().'.product.update', $larashopProduct->id) }}" method="post" enctype="multipart/form-data">
+            <form action="{{ route(LaraShop::adminName().'.product.update', $product->id) }}" method="post" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <div class="row">
@@ -24,7 +24,7 @@
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="name" class="form-control-label">اسم المنتج <span class="text-danger">*</span> </label>
-                                    <input type="text" class="form-control" id="name" name="name" value="{{ old('name', $larashopProduct->name) }}" />
+                                    <input type="text" class="form-control" id="name" name="name" value="{{ old('name', $product->name) }}" />
                                     @error('name')
                                     <p class="text-danger">{{ $message }}</p>
                                     @enderror
@@ -32,7 +32,7 @@
 
                                 <div class="form-group">
                                     <label for="slug" class="form-control-label">الاسم في الرابط <span class="text-danger">*</span> </label>
-                                    <input type="text" class="form-control" id="slug" name="slug" value="{{ old('slug', $larashopProduct->slug) }}" readonly />
+                                    <input type="text" class="form-control" id="slug" name="slug" value="{{ old('slug', $product->slug) }}" readonly />
                                     <p class="small text-info text-right" style="direction: ltr">{{ config('app.url') }}/{{ config('larashop.frontend_prefix') }}/product/<span
                                             id="slug-text"></span> </p>
                                     @error('slug')
@@ -43,15 +43,14 @@
 
                                 <div class="form-group">
                                     <label for="description" class="form-control-label">وصف المنتج</label>
-                                    <textarea type="text" class="editor form-control" id="description"
-                                        name="description">{{ old('description', $larashopProduct->description) }}</textarea>
+                                    <textarea type="text" class="editor form-control" id="description" name="description">{{ old('description', $product->description) }}</textarea>
                                     @error('description')
                                     <p class="text-danger">{{ $message }}</p>
                                     @enderror
                                 </div>
 
                                 <div class="form-group">
-                                    @if ($img = $larashopProduct->getFirstMedia('main'))
+                                    @if ($img = $product->getFirstMedia('main'))
                                     <div class="col-md-4">
                                         {{ $img('thumb')->attributes(['class'=>'img-fluid img-thumbnail']) }}
                                     </div>
@@ -65,7 +64,7 @@
 
                                 <div class="form-group">
                                     <div class="row">
-                                        @foreach ($larashopProduct->getMedia('images') as $item)
+                                        @foreach ($product->getMedia('images') as $item)
                                         <div class="col-md-3">
                                             <div class="d-flex flex-column justify-content-between align-items-center">
                                                 {{-- <img src="{{ $item->getUrl('responsive') }}" alt="" class="img-fluid img-thumbnail"> --}}
@@ -85,8 +84,8 @@
                                 <div class="form-group">
                                     <label for="hidden" class="form-control-label">حالة الظهور <span class="text-danger">*</span> </label>
                                     <select class="form-control" id="hidden" name="hidden">
-                                        <option value="0" {{ old('hidden', $larashopProduct->hidden) == 0 ? 'selected' : '' }}>ظاهر</option>
-                                        <option value="1" {{ old('hidden', $larashopProduct->hidden) == 1 ? 'selected' : '' }}>مخفي</option>
+                                        <option value="0" {{ old('hidden', $product->hidden) == 0 ? 'selected' : '' }}>ظاهر</option>
+                                        <option value="1" {{ old('hidden', $product->hidden) == 1 ? 'selected' : '' }}>مخفي</option>
                                     </select>
                                     @error('hidden')
                                     <p class="text-danger">{{ $message }}</p>
@@ -104,7 +103,7 @@
                                 <div class="form-group">
                                     <label for="categories" class="form-control-label">اختر الاقسام <span class="text-danger">*</span> </label>
                                     <select class="form-control" id="categories" name="categories[]" multiple>
-                                        {{ Larashop::getCategoriesSelect(old('categories', $larashopProduct->larashopCategories->pluck('id')->all())) }}
+                                        {{ Larashop::getCategoriesSelect(old('categories', $product->larashopCategories->pluck('id')->all())) }}
                                     </select>
                                     @error('categories')
                                     <p class="text-danger">{{ $message }}</p>
@@ -116,7 +115,7 @@
                                     <select class="form-control" id="brand_id" name="brand_id">
                                         <option value="">اختر براند</option>
                                         @foreach ($brands as $brand)
-                                        <option value="{{ $brand->id }}" {{ $brand->id == old('brand_id', $larashopProduct->brand_id) ? 'selected' : '' }}>{{ $brand->name }}
+                                        <option value="{{ $brand->id }}" {{ $brand->id == old('brand_id', $product->brand_id) ? 'selected' : '' }}>{{ $brand->name }}
                                         </option>
                                         @endforeach
                                     </select>
@@ -134,7 +133,7 @@
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="price" class="form-control-label">سعر المنتج <span class="text-danger">*</span> </label>
-                                    <input type="text" class="form-control" id="price" name="price" value="{{ old('price', $larashopProduct->price) }}" />
+                                    <input type="text" class="form-control" id="price" name="price" value="{{ old('price', $product->price) }}" />
                                     @error('price')
                                     <p class="text-danger">{{ $message }}</p>
                                     @enderror
@@ -142,7 +141,7 @@
 
                                 <div class="form-group">
                                     <label for="old_price" class="form-control-label">سعر قبل الخصم </label>
-                                    <input type="text" class="form-control" id="old_price" name="old_price" value="{{ old('old_price', $larashopProduct->old_price) }}" />
+                                    <input type="text" class="form-control" id="old_price" name="old_price" value="{{ old('old_price', $product->old_price) }}" />
                                     @error('old_price')
                                     <p class="text-danger">{{ $message }}</p>
                                     @enderror
@@ -157,7 +156,7 @@
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="qty" class="form-control-label ml-2">الكمية المتوفرة</label>
-                                    <input type="text" class="form-control" id="qty" name="qty" value="{{ old('qty', $larashopProduct->qty) }}" />
+                                    <input type="text" class="form-control" id="qty" name="qty" value="{{ old('qty', $product->qty) }}" />
                                     <p class="text-info small">اتركها فارغة للكميات غير المحدودة</p>
                                     @error('qty')
                                     <p class="text-danger">{{ $message }}</p>
@@ -166,7 +165,7 @@
 
                                 <div class="form-group">
                                     <label for="max_qty" class="form-control-label ml-2">اقصى كمية في الطلب</label>
-                                    <input type="text" class="form-control" id="max_qty" name="max_qty" value="{{ old('max_qty', $larashopProduct->max_qty) }}" />
+                                    <input type="text" class="form-control" id="max_qty" name="max_qty" value="{{ old('max_qty', $product->max_qty) }}" />
                                     @error('max_qty')
                                     <p class="text-danger">{{ $message }}</p>
                                     @enderror
@@ -182,20 +181,20 @@
                                 <div class="row text-center">
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <input type="checkbox" id="new" name="new" value="1" {{ old('new', $larashopProduct->new) == 1? 'checked':'' }} />
+                                            <input type="checkbox" id="new" name="new" value="1" {{ old('new', $product->new) == 1? 'checked':'' }} />
                                             <label for="new" class="form-control-label ml-2">جديد</label>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <input type="checkbox" id="has_discount" name="has_discount" value="1"
-                                                {{ old('has_discount', $larashopProduct->has_discount) == 1? 'checked':'' }} />
+                                                {{ old('has_discount', $product->has_discount) == 1? 'checked':'' }} />
                                             <label for="has_discount" class="form-control-label ml-2">خصم</label>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <input type="checkbox" id="featured" name="featured" value="1" {{ old('featured', $larashopProduct->featured) == 1? 'checked':'' }} />
+                                            <input type="checkbox" id="featured" name="featured" value="1" {{ old('featured', $product->featured) == 1? 'checked':'' }} />
                                             <label for="featured" class="form-control-label ml-2">مميز</label>
                                         </div>
                                     </div>

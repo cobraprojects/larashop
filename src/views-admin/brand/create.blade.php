@@ -57,21 +57,12 @@
 </div>
 @endsection
 @section('script')
-<script src="//cdn.ckeditor.com/4.9.2/full/ckeditor.js"></script>
 <script>
     $('#name').keyup(function(){
         let value = $(this).val();
         let slug = getSlug(value);
         $('#slug').val(slug);
         $('#slug-text').text(slug);
-    });
-
-    let options = {
-        language: '{{ app()->getLocale() }}'
-    };
-
-    $('.editor').each(function(e){
-        CKEDITOR.replace( this.id, options);
     });
 </script>
 @endsection

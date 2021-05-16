@@ -41,38 +41,38 @@ class LarashopCategoryController extends Controller
         return back()->with('success', 'تم الحفظ بنجاح');
     }
 
-    public function edit(LarashopCategory $larashopCategory)
+    public function edit(LarashopCategory $category)
     {
         $categories = LaraShop::getAllCategories();
-        return view('multiauth::category.edit', compact('categories', 'larashopCategory'));
+        return view('multiauth::category.edit', compact('categories', 'category'));
     }
 
-    public function update(Request $request, LarashopCategory $larashopCategory)
+    public function update(Request $request, LarashopCategory $category)
     {
         $data = $request->validate([
             'name' => 'required',
-            'slug' => 'required|unique:larashop_categories,slug,' . $larashopCategory->id,
+            'slug' => 'required|unique:larashop_categories,slug,' . $category->id,
             'parent_id' => 'nullable',
             'description' => 'nullable',
             'order' => 'required',
         ]);
 
-        $larashopCategory->update($data);
+        $category->update($data);
 
         if ($request->image) {
-            $larashopCategory->addMediaFromRequest('image')->toMediaCollection('image');
+            $category->addMediaFromRequest('image')->toMediaCollection('image');
         }
 
         return back()->with('success', 'تم الحفظ بنجاح');
     }
 
 
-    public function destroy(LarashopCategory $larashopCategory)
+    public function destroy(LarashopCategory $category)
     {
-        if ($larashopCategory->hasChilds) {
+        if ($category->hasChilds) {
             return back()->with('error', 'هذا القسم يحتوي على اقسام فرعية .. برجاء نقلها او حذفها اولاَ...');
         }
-        $larashopCategory->delete();
+        $category->delete();
 
         return back()->with('success', 'تم الحذف بنجاح');
     }

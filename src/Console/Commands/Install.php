@@ -110,6 +110,11 @@ class Install extends Command
             $this->info(Artisan::output());
         }
 
+        if (!$this->permissionExists('LarashopCity')) {
+            Artisan::call('multiauth:permissions LarashopCity');
+            $this->info(Artisan::output());
+        }
+
         Artisan::call('storage:link');
     }
 

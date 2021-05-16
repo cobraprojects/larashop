@@ -32,6 +32,6 @@ class CreateLarashopBrandsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('larashop_products');
+        Schema::dropIfExists('larashop_brands');
     }
 }

@@ -46,7 +46,7 @@
             <ul class="nav-sub">
                 @permitTo('ReadLarashopCategory')
                 <li class="nav-item">
-                    <a href="{{ route('admin.shop.category.index') }}" class="nav-link {{ $routeName->contains('category') ? 'active' : '' }}">
+                    <a href="{{ route(LaraShop::adminName().'.category.index') }}" class="nav-link {{ $routeName->contains('category') ? 'active' : '' }}">
                         <i class="fa fa-bars"></i>
                         <span>الأقسام</span>
                     </a>
@@ -54,7 +54,7 @@
                 @endpermitTo
                 @permitTo('ReadLarashopBrand')
                 <li class="nav-item">
-                    <a href="{{ route('admin.shop.brand.index') }}" class="nav-link {{ $routeName->contains('brand') ? 'active' : '' }}">
+                    <a href="{{ route(LaraShop::adminName().'.brand.index') }}" class="nav-link {{ $routeName->contains('brand') ? 'active' : '' }}">
                         <i class="fa fa-star"></i>
                         <span>البراندات</span>
                     </a>
@@ -62,7 +62,7 @@
                 @endpermitTo
                 @permitTo('ReadLarashopProduct')
                 <li class="nav-item">
-                    <a href="{{ route('admin.shop.product.index') }}" class="nav-link {{ $routeName->contains('product') ? 'active' : '' }}">
+                    <a href="{{ route(LaraShop::adminName().'.product.index') }}" class="nav-link {{ $routeName->contains('product') ? 'active' : '' }}">
                         <i class="fa fa-th"></i>
                         <span>المنتجات</span>
                     </a>
@@ -70,9 +70,17 @@
                 @endpermitTo
                 @permitTo('ReadLarashopCoupon')
                 <li class="nav-item">
-                    <a href="{{ route('admin.shop.coupon.index') }}" class="nav-link {{ $routeName->contains('coupon') ? 'active' : '' }}">
+                    <a href="{{ route(LaraShop::adminName().'.coupon.index') }}" class="nav-link {{ $routeName->contains('coupon') ? 'active' : '' }}">
                         <i class="fa fa-gift"></i>
                         <span>كوبونات الخصم</span>
+                    </a>
+                </li>
+                @endpermitTo
+                @permitTo('ReadLarashopCity')
+                <li class="nav-item">
+                    <a href="{{ route(LaraShop::adminName().'.city.index') }}" class="nav-link {{ $routeName->contains('city') ? 'active' : '' }}">
+                        <i class="fa fa-truck"></i>
+                        <span>المدن وتكلفة الشحن</span>
                     </a>
                 </li>
                 @endpermitTo

@@ -65,18 +65,18 @@ class LarashopProductController extends Controller
         return back()->with('success', 'تم الحفظ بنجاح');
     }
 
-    public function edit(LarashopProduct $larashopProduct)
+    public function edit(LarashopProduct $product)
     {
         $categories = LaraShop::getAllCategories();
         $brands = LaraShopBrand::cursor();
-        return view('multiauth::product.edit', compact('categories', 'larashopProduct', 'brands'));
+        return view('multiauth::product.edit', compact('categories', 'product', 'brands'));
     }
 
-    public function update(Request $request, LarashopProduct $larashopProduct)
+    public function update(Request $request, LarashopProduct $product)
     {
         $data = $request->validate([
             'name' => 'required',
-            'slug' => 'required|unique:larashop_products,slug,' . $larashopProduct->id,
+            'slug' => 'required|unique:larashop_products,slug,' . $product->id,
             'description' => 'required',
             'hidden' => 'nullable',
             'categories' => 'required',
@@ -91,20 +91,20 @@ class LarashopProductController extends Controller
             'brand_id' => 'nullable',
         ]);
 
-        $larashopProduct->update($data);
+        $product->update($data);
 
         if ($request->image) {
-            $larashopProduct->addMediaFromRequest('image')->toMediaCollection('main');
+            $product->addMediaFromRequest('image')->toMediaCollection('main');
         }
 
         if ($request->images) {
-            $larashopProduct->addMultipleMediaFromRequest(['images'])
+            $product->addMultipleMediaFromRequest(['images'])
                 ->each(function ($fileAdder) {
                     $fileAdder->toMediaCollection('images');
                 });
         }
 
-        $larashopProduct->larashopCategories()->sync($request->categories);
+        $product->larashopCategories()->sync($request->categories);
 
         Cache::forget('allProducts');
 
@@ -112,12 +112,12 @@ class LarashopProductController extends Controller
     }
 
 
-    public function destroy(LarashopProduct $larashopProduct)
+    public function destroy(LarashopProduct $product)
     {
-        if ($larashopProduct->hasChilds) {
+        if ($product->hasChilds) {
             return back()->with('error', 'هذا المنتج يحتوي على منتجات فرعية .. برجاء نقلها او حذفها اولاَ...');
         }
-        $larashopProduct->delete();
+        $product->delete();
 
         Cache::forget('allProducts');
 

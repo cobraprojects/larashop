@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateLarashopCategoryLarashopProductTable extends Migration
+class CreateLarashopCitiesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateLarashopCategoryLarashopProductTable extends Migration
      */
     public function up()
     {
-        Schema::create('larashop_category_larashop_product', function (Blueprint $table) {
+        Schema::create('larashop_cities', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('larashop_category_id')->constrained()->onDelete('cascade');
-            $table->foreignId('larashop_product_id')->constrained()->onDelete('cascade');
+            $table->string('name');
+            $table->unsignedInteger('shipping_cost')->default(0);
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ class CreateLarashopCategoryLarashopProductTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('larashop_category_larashop_product');
+        Schema::dropIfExists('larashop_cities');
     }
 }

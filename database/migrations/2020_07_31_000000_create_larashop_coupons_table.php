@@ -35,6 +35,6 @@ class CreateLarashopCouponsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('larashop_products');
+        Schema::dropIfExists('larashop_coupons');
     }
 }

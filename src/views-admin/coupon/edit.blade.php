@@ -17,12 +17,12 @@
                     <div class="card-title">تعديل كوبون خصم</div>
                 </div>
                 <div class="card-body">
-                    <form action="{{ route(LaraShop::adminName().'.coupon.update', $larashopCoupon->id) }}" method="post">
+                    <form action="{{ route(LaraShop::adminName().'.coupon.update', $coupon->id) }}" method="post">
                         @csrf
                         @method('PUT')
                         <div class="form-group">
                             <label for="code" class="form-control-label">كود الكوبون <span class="text-danger">*</span> </label>
-                            <input type="text" class="form-control" id="code" name="code" value="{{ old('code', $larashopCoupon->code) }}" />
+                            <input type="text" class="form-control" id="code" name="code" value="{{ old('code', $coupon->code) }}" />
                             @error('code')
                             <p class="text-danger">{{ $message }}</p>
                             @enderror
@@ -30,7 +30,7 @@
 
                         <div class="form-group">
                             <label for="description" class="form-control-label">وصف مختصر</label>
-                            <input type="text" class="form-control" id="description" name="description" value="{{ old('description', $larashopCoupon->description) }}" />
+                            <input type="text" class="form-control" id="description" name="description" value="{{ old('description', $coupon->description) }}" />
                             @error('description')
                             <p class="text-danger">{{ $message }}</p>
                             @enderror
@@ -39,13 +39,13 @@
                         <div class="form-group">
                             <label for="coupon_type" class="form-control-label">نوع الكوبون</label>
                             <select class="form-control" id="coupon_type" name="coupon_type">
-                                <option {{ old('coupon_type', $larashopCoupon->coupon_type) == 'TotalCoupon' ? 'selected' : '' }} value="TotalCoupon">خصم على الاجمالي</option>
-                                <option {{ old('coupon_type', $larashopCoupon->coupon_type) == 'ShippingCoupon' ? 'selected' : '' }} value="ShippingCoupon">خصم على مصاريف الشحن
+                                <option {{ old('coupon_type', $coupon->coupon_type) == 'TotalCoupon' ? 'selected' : '' }} value="TotalCoupon">خصم على الاجمالي</option>
+                                <option {{ old('coupon_type', $coupon->coupon_type) == 'ShippingCoupon' ? 'selected' : '' }} value="ShippingCoupon">خصم على مصاريف الشحن
                                 </option>
-                                <option {{ old('coupon_type', $larashopCoupon->coupon_type) == 'CategoriesCoupon' ? 'selected' : '' }} value="CategoriesCoupon">خصم على اقسام
+                                <option {{ old('coupon_type', $coupon->coupon_type) == 'CategoriesCoupon' ? 'selected' : '' }} value="CategoriesCoupon">خصم على اقسام
                                 </option>
-                                <option {{ old('coupon_type', $larashopCoupon->coupon_type) == 'ProductsCoupon' ? 'selected' : '' }} value="ProductsCoupon">خصم على اصناف</option>
-                                <option {{ old('coupon_type', $larashopCoupon->coupon_type) == 'UsersCoupon' ? 'selected' : '' }} value="UsersCoupon">خصم لافراد</option>
+                                <option {{ old('coupon_type', $coupon->coupon_type) == 'ProductsCoupon' ? 'selected' : '' }} value="ProductsCoupon">خصم على اصناف</option>
+                                <option {{ old('coupon_type', $coupon->coupon_type) == 'UsersCoupon' ? 'selected' : '' }} value="UsersCoupon">خصم لافراد</option>
                             </select>
                             @error('coupon_type')
                             <p class="text-danger">{{ $message }}</p>
@@ -53,14 +53,14 @@
                         </div>
 
                         <div class="coupon_type">
-                            <input type="hidden" name="data" id="data" class="d-none" value="{{ old('data', implode(',', $larashopCoupon->data)) }}" />
+                            <input type="hidden" name="data" id="data" class="d-none" value="{{ old('data', implode(',', $coupon->data)) }}" />
 
                             <div class="form-group CategoriesCoupon d-none">
                                 <label for="categories" class="form-control-label">اختر اقسام</label>
                                 <select class="form-control select2" id="categories" multiple name="categories[]">
                                     @foreach ($categories as $item)
                                     <option value="{{ $item->id }}"
-                                        {{ old('coupon_type', $larashopCoupon->coupon_type) == 'CategoriesCoupon' && @ in_array($item->id, old('categories', $larashopCoupon->data)) ? 'selected' : '' }}>
+                                        {{ old('coupon_type', $coupon->coupon_type) == 'CategoriesCoupon' && @ in_array($item->id, old('categories', $coupon->data)) ? 'selected' : '' }}>
                                         {{ $item->name }}</option>
                                     @endforeach
                                 </select>
@@ -71,7 +71,7 @@
                                 <select class="form-control select2" id="products" multiple name="products[]">
                                     @foreach ($products as $item)
                                     <option value="{{ $item->id }}"
-                                        {{ old('coupon_type', $larashopCoupon->coupon_type) == 'ProductsCoupon' && @ in_array($item->id, old('products', $larashopCoupon->data)) ? 'selected' : '' }}>
+                                        {{ old('coupon_type', $coupon->coupon_type) == 'ProductsCoupon' && @ in_array($item->id, old('products', $coupon->data)) ? 'selected' : '' }}>
                                         {{ $item->name }}</option>
                                     @endforeach
                                 </select>
@@ -82,7 +82,7 @@
                                 <select class="form-control select2" id="users" multiple name="users[]">
                                     @foreach ($users as $item)
                                     <option value="{{ $item->id }}"
-                                        {{ old('coupon_type', $larashopCoupon->coupon_type) == 'UsersCoupon' && @ in_array($item->id, old('users', $larashopCoupon->data)) ? 'selected' : '' }}>
+                                        {{ old('coupon_type', $coupon->coupon_type) == 'UsersCoupon' && @ in_array($item->id, old('users', $coupon->data)) ? 'selected' : '' }}>
                                         {{ $item->name }}</option>
                                     @endforeach
                                 </select>
@@ -92,11 +92,11 @@
                         <div class="form-group">
                             <label for="amount" class="form-control-label">قيمة الخصم <span class="text-danger">*</span> </label>
                             <div class="input-group">
-                                <input type="text" class="form-control" id="amount" name="amount" value="{{ old('amount', $larashopCoupon->amount) }}" />
+                                <input type="text" class="form-control" id="amount" name="amount" value="{{ old('amount', $coupon->amount) }}" />
                                 <div class="input-group-append">
                                     <select name="discount_type" id="discount_type" name="discount_type">
-                                        <option value="percent" {{ old('discount_type', $larashopCoupon->discount_type) == 'percent' ? 'selected' : '' }}>نسبة مئوية</option>
-                                        <option value="value" {{ old('discount_type', $larashopCoupon->discount_type) == 'value' ? 'selected' : '' }}>قيمة مادية</option>
+                                        <option value="percent" {{ old('discount_type', $coupon->discount_type) == 'percent' ? 'selected' : '' }}>نسبة مئوية</option>
+                                        <option value="value" {{ old('discount_type', $coupon->discount_type) == 'value' ? 'selected' : '' }}>قيمة مادية</option>
                                     </select>
                                 </div>
                             </div>
@@ -110,8 +110,8 @@
                         <div class="form-group">
                             <label for="only_once" class="form-control-label">يستخدم الكوبون مرة واحدة للمستخدم</label>
                             <select class="form-control" id="only_once" name="only_once">
-                                <option value="1" {{ old('only_once', $larashopCoupon->only_once) == 1 ? 'selected' : '' }}>نعم</option>
-                                <option value="0" {{ old('only_once', $larashopCoupon->only_once) == "0" ? 'selected' : '' }}>لا</option>
+                                <option value="1" {{ old('only_once', $coupon->only_once) == 1 ? 'selected' : '' }}>نعم</option>
+                                <option value="0" {{ old('only_once', $coupon->only_once) == "0" ? 'selected' : '' }}>لا</option>
                             </select>
                         </div>
 
@@ -136,7 +136,7 @@
 
 <script>
     var old = '{{ old('coupon_type') }}';
-    var data = '{{ old('data', implode(',', $larashopCoupon->data)) }}';
+    var data = '{{ old('data', implode(',', $coupon->data)) }}';
     var dataArray = data.split(',');
 
     $('.select2').select2();
