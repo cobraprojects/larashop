@@ -10,7 +10,7 @@
     ],
     "minimum-stability": "dev",
     "require": {
-        "cobraprojects/laravel-multiauth": "2.*",
+        "cobraprojects/laravel-multiauth": "^2.0",
         "spatie/laravel-medialibrary": "^8.0.0",
         "bumbummen99/shoppingcart": "dev-master",
         "spatie/laravel-searchable": "dev-master"

@@ -17,4 +17,9 @@ Route::name(LaraShop::adminName() . '.')->group(function () {
 
     // Cities
     Route::resource('/city', 'LarashopCityController');
+
+    // Orders
+    Route::resource('/order', 'LarashopOrderController')->only(['index', 'show']);
+    Route::post('/order/{order}/changePaymentStatus', 'LarashopOrderController@changePaymentStatus')->name('order.changePaymentStatus');
+    Route::post('/order/{order}/changeOrderStatus', 'LarashopOrderController@changeOrderStatus')->name('order.changeOrderStatus');
 });

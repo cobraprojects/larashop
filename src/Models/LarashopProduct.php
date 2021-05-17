@@ -78,17 +78,17 @@ class LarashopProduct extends Model implements HasMedia, Buyable, Searchable
 
     public function parent()
     {
-        return $this->belongsTo('CobraProjects\LaraShop\Models\LarashopProduct', 'parent_id', 'id');
+        return $this->belongsTo(LarashopProduct::class, 'parent_id', 'id');
     }
 
     public function childs()
     {
-        return $this->hasMany('CobraProjects\LaraShop\Models\LarashopProduct', 'parent_id', 'id');
+        return $this->hasMany(LarashopProduct::class, 'parent_id', 'id');
     }
 
     public function larashopCategories()
     {
-        return $this->belongsToMany('CobraProjects\LaraShop\Models\LarashopCategory');
+        return $this->belongsToMany(LarashopCategory::class);
     }
 
     public function brand(): BelongsTo

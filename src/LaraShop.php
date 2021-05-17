@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\Cache;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use CobraProjects\LaraShop\Models\LarashopProduct;
 use CobraProjects\LaraShop\Models\LarashopCategory;
-use App\User;
 
 class LaraShop
 {
@@ -133,20 +132,23 @@ class LaraShop
         return Cart::Instance($instance)->content();
     }
 
-    public function storeCart(User $user)
+    public function storeCart($user)
     {
+        $user = config('auth.providers.users.model')::find($user);
         Cart::store($user->id);
         Cart::Instance('wishlist')->store($user->id);
     }
 
-    public function restoreCart(User $user)
+    public function restoreCart($user)
     {
+        $user = config('auth.providers.users.model')::find($user);
         Cart::restore($user->id);
         Cart::Instance('wishlist')->restore($user->id);
     }
 
-    public function deleteCart(User $user)
+    public function deleteCart($user)
     {
+        $user = config('auth.providers.users.model')::find($user);
         Cart::erase($user->id);
     }
 
@@ -160,8 +162,9 @@ class LaraShop
         return Cart::total();
     }
 
-    public function cartLogin(User $user)
+    public function cartLogin($user)
     {
+        $user = config('auth.providers.users.model')::find($user);
         $old = Cart::content();
         Cart::restore($user->id);
         $old->merge(Cart::content());

@@ -6,6 +6,13 @@ return [
     'backend_prefix' => 'admin/shop',
     'admin_middleware' => 'auth:admin',
 
+    # Payment methods
+    'paymentMethods' => [
+        'cod' => 'دفع عند الاستلام',
+        'credit' => 'بطاقة ائتمان',
+        'bank' => 'تحويل بنكي',
+    ],
+
     # Images settings
     'thumbnails' => [
         'category' => [
