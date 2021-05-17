@@ -8,6 +8,14 @@ use Illuminate\Http\Request;
 
 class LarashopCityController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permitTo:ReadLarashopCity')->only('index');
+        $this->middleware('permitTo:CreateLarashopCity')->only('create', 'store');
+        $this->middleware('permitTo:UpdateLarashopCity')->only('edit', 'update');
+        $this->middleware('permitTo:DeleteLarashopCity')->only('destroy');
+    }
+
     public function index()
     {
         $cities = LarashopCity::cursor();

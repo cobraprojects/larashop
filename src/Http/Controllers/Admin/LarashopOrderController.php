@@ -10,7 +10,10 @@ class LarashopOrderController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('permitTo:ReadLarashopOrder')->only('index', 'show');
+        $this->middleware('permitTo:ReadLarashopOrder')->only('index');
+        $this->middleware('permitTo:CreateLarashopOrder')->only('create', 'store');
+        $this->middleware('permitTo:UpdateLarashopOrder')->only('edit', 'update', 'changePaymentStatus', 'changeOrderStatus');
+        $this->middleware('permitTo:DeleteLarashopOrder')->only('destroy');
     }
 
     public function index()

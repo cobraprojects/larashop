@@ -11,6 +11,14 @@ use Illuminate\Http\Request;
 
 class LarashopCouponController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permitTo:ReadLarashopCoupon')->only('index');
+        $this->middleware('permitTo:CreateLarashopCoupon')->only('create', 'store');
+        $this->middleware('permitTo:UpdateLarashopCoupon')->only('edit', 'update');
+        $this->middleware('permitTo:DeleteLarashopCoupon')->only('destroy');
+    }
+
     public function index()
     {
         $coupons = LarashopCoupon::cursor();

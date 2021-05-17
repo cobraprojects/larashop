@@ -8,6 +8,14 @@ use Illuminate\Http\Request;
 
 class LarashopBrandController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permitTo:ReadLarashopBrand')->only('index');
+        $this->middleware('permitTo:CreateLarashopBrand')->only('create', 'store');
+        $this->middleware('permitTo:UpdateLarashopBrand')->only('edit', 'update');
+        $this->middleware('permitTo:DeleteLarashopBrand')->only('destroy');
+    }
+
     public function index()
     {
         $brands = LarashopBrand::cursor();

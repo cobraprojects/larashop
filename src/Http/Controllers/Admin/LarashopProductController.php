@@ -12,6 +12,14 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class LarashopProductController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permitTo:ReadLarashopProduct')->only('index');
+        $this->middleware('permitTo:CreateLarashopProduct')->only('create', 'store');
+        $this->middleware('permitTo:UpdateLarashopProduct')->only('edit', 'update');
+        $this->middleware('permitTo:DeleteLarashopProduct')->only('destroy', 'deleteMedia');
+    }
+
     public function index()
     {
         $products = LaraShop::getAllProducts();

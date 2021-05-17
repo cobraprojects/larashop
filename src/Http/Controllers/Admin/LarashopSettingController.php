@@ -11,7 +11,8 @@ class LarashopSettingController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('permitTo:ReadLarashopSetting');
+        $this->middleware('permitTo:ReadLarashopSetting')->only('index');
+        $this->middleware('permitTo:UpdateLarashopSetting')->only('store');
     }
 
     public function index()

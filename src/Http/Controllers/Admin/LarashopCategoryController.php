@@ -9,6 +9,14 @@ use Illuminate\Http\Request;
 
 class LarashopCategoryController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permitTo:ReadLarashopCategory')->only('index');
+        $this->middleware('permitTo:CreateLarashopCategory')->only('create', 'store');
+        $this->middleware('permitTo:UpdateLarashopCategory')->only('edit', 'update');
+        $this->middleware('permitTo:DeleteLarashopCategory')->only('destroy');
+    }
+
     public function index()
     {
         $categories = LaraShop::getAllCategories();
