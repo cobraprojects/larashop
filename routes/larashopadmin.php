@@ -22,4 +22,8 @@ Route::name(LaraShop::adminName() . '.')->group(function () {
     Route::resource('/order', 'LarashopOrderController')->only(['index', 'show']);
     Route::post('/order/{order}/changePaymentStatus', 'LarashopOrderController@changePaymentStatus')->name('order.changePaymentStatus');
     Route::post('/order/{order}/changeOrderStatus', 'LarashopOrderController@changeOrderStatus')->name('order.changeOrderStatus');
+
+    // Settings
+    Route::get('/setting', 'LarashopSettingController@index')->name('setting.index');
+    Route::post('/setting', 'LarashopSettingController@store');
 });

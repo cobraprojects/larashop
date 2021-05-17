@@ -92,6 +92,14 @@
                     </a>
                 </li>
                 @endpermitTo
+                @permitTo('ReadLarashopSetting')
+                <li class="nav-item">
+                    <a href="{{ route(LaraShop::adminName().'.setting.index') }}" class="nav-link {{ $routeName->contains('setting') ? 'active' : '' }}">
+                        <i class="fa fa-gear"></i>
+                        <span>اعدادات المتجر</span>
+                    </a>
+                </li>
+                @endpermitTo
             </ul>
         </li><!-- nav-item -->
     </ul>

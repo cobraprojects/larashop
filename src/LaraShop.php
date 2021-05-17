@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Cache;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use CobraProjects\LaraShop\Models\LarashopProduct;
 use CobraProjects\LaraShop\Models\LarashopCategory;
+use CobraProjects\LaraShop\Models\LarashopSetting;
 
 class LaraShop
 {
@@ -170,5 +171,52 @@ class LaraShop
         $old->merge(Cart::content());
         Cart::store($user->id);
         Cart::content();
+    }
+
+    private function setting(): LarashopSetting
+    {
+        return Cache::rememberForever('larashopSettings', function () {
+            return LarashopSetting::first() ?? new LarashopSetting();
+        });
+    }
+
+    public function siteName()
+    {
+        return $this->setting()->name;
+    }
+
+    public function siteDescription()
+    {
+        return $this->setting()->description;
+    }
+
+    public function sitePhone()
+    {
+        return $this->setting()->phone;
+    }
+
+    public function siteEmail()
+    {
+        return $this->setting()->email;
+    }
+
+    public function siteWhatsapp()
+    {
+        return $this->setting()->whatsapp;
+    }
+
+    public function countryName()
+    {
+        return $this->setting()->country_name;
+    }
+
+    public function currencyName()
+    {
+        return $this->setting()->currency_name;
+    }
+
+    public function currencySymbol()
+    {
+        return $this->setting()->currency_symbol ?? $this->currencyName();
     }
 }
