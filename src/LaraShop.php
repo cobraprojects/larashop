@@ -8,6 +8,7 @@ use Gloudemans\Shoppingcart\Facades\Cart;
 use CobraProjects\LaraShop\Models\LarashopProduct;
 use CobraProjects\LaraShop\Models\LarashopCategory;
 use CobraProjects\LaraShop\Models\LarashopSetting;
+use CobraProjects\LaraShop\Models\LarashopSocial;
 
 class LaraShop
 {
@@ -218,5 +219,15 @@ class LaraShop
     public function currencySymbol()
     {
         return $this->setting()->currency_symbol ?? $this->currencyName();
+    }
+
+    public function social()
+    {
+        return LarashopSocial::all();
+    }
+
+    public function socialIcon(LarashopSocial $larashopSocial)
+    {
+        return '<ion-icon name="' . $larashopSocial->icon_name . '" size="large" class="' . $larashopSocial->icon_color . '" aria-label="' . $larashopSocial->name . '"></ion-icon>';
     }
 }

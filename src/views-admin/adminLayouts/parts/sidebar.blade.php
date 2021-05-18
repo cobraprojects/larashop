@@ -24,19 +24,21 @@
         </li><!-- nav-item -->
 
         {{--ادارة المستخدمين--}}
-        @admin('super')
+        @permitTo('ReadAdmin')
         <li class="nav-item">
             <a href="" class="nav-link with-sub {{ $routeName->contains('roles')||$routeName->contains('role')||request()->routeIs('admin.show') ? 'active' : '' }}">
                 <i class="fa fa-users"></i>
                 <span>إدارةالمستخدمين</span>
             </a>
             <ul class="nav-sub">
+                @permitTo('ReadRole')
                 <li class="nav-item"><a href="{{ route('admin.roles') }}"
                         class="nav-link {{ $routeName->contains('roles')||$routeName->contains('roles') ? 'active' : '' }}">الوظائف والصلاحيات</a></li>
+                @endpermitTo
                 <li class="nav-item"><a href="{{ route('admin.show') }}" class="nav-link {{ request()->routeIs('admin.show') ? 'active' : '' }} ">المستخدمين</a></li>
             </ul>
         </li><!-- nav-item -->
-        @endadmin
+        @endpermitTo
 
         <li class="nav-item">
             <a href="" class="nav-link with-sub {{ $routeName->contains(LaraShop::getShopRouteName ()) ? 'active' : '' }}">
@@ -102,5 +104,14 @@
                 @endpermitTo
             </ul>
         </li><!-- nav-item -->
+
+        @permitTo('ReadLarashopSocial')
+        <li class="nav-item">
+            <a href="{{ route(LaraShop::adminName().'.social.index') }}" class="nav-link {{ $routeName->contains('social') ? 'active' : '' }}">
+                <i class="fa fa-globe"></i>
+                <span>روابط التواصل الإجتماعي</span>
+            </a>
+        </li>
+        @endpermitTo
     </ul>
 </div><!-- kt-sideleft -->

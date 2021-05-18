@@ -136,16 +136,16 @@
         },
         {
             "name": "cobraprojects/laravel-multiauth",
-            "version": "v2",
+            "version": "v2.1.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cobraprojects/laravel-multiauth.git",
-                "reference": "e9a9bdd5262e892c50e38a5f1f1eb13da999faed"
+                "reference": "1f65ae8aea36c4b7fa2c6d761fa7c35a2655d037"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cobraprojects/laravel-multiauth/zipball/e9a9bdd5262e892c50e38a5f1f1eb13da999faed",
-                "reference": "e9a9bdd5262e892c50e38a5f1f1eb13da999faed",
+                "url": "https://api.github.com/repos/cobraprojects/laravel-multiauth/zipball/1f65ae8aea36c4b7fa2c6d761fa7c35a2655d037",
+                "reference": "1f65ae8aea36c4b7fa2c6d761fa7c35a2655d037",
                 "shasum": ""
             },
             "require": {
@@ -195,9 +195,9 @@
             ],
             "support": {
                 "issues": "https://github.com/cobraprojects/laravel-multiauth/issues",
-                "source": "https://github.com/cobraprojects/laravel-multiauth/tree/v2"
+                "source": "https://github.com/cobraprojects/laravel-multiauth/tree/v2.1.3"
             },
-            "time": "2020-12-19T12:14:49+00:00"
+            "time": "2021-05-17T18:24:33+00:00"
         },
         {
             "name": "doctrine/inflector",
@@ -711,12 +711,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "c07ae81dead3edede007b0e183d320d1722c1783"
+                "reference": "55b886683e0a019bcad0d9d70bb781a3de1a6755"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/c07ae81dead3edede007b0e183d320d1722c1783",
-                "reference": "c07ae81dead3edede007b0e183d320d1722c1783",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/55b886683e0a019bcad0d9d70bb781a3de1a6755",
+                "reference": "55b886683e0a019bcad0d9d70bb781a3de1a6755",
                 "shasum": ""
             },
             "require": {
@@ -872,7 +872,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2021-05-17T13:31:29+00:00"
+            "time": "2021-05-18T15:37:44+00:00"
         },
         {
             "name": "laravel/legacy-factories",
@@ -5514,12 +5514,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/orchestral/testbench.git",
-                "reference": "f02380f6d3610e57a791c787d0ed2b9a075aa2f7"
+                "reference": "7cb8b45e3f28952270026482e6c169dd52660956"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/orchestral/testbench/zipball/f02380f6d3610e57a791c787d0ed2b9a075aa2f7",
-                "reference": "f02380f6d3610e57a791c787d0ed2b9a075aa2f7",
+                "url": "https://api.github.com/repos/orchestral/testbench/zipball/7cb8b45e3f28952270026482e6c169dd52660956",
+                "reference": "7cb8b45e3f28952270026482e6c169dd52660956",
                 "shasum": ""
             },
             "require": {
@@ -5572,7 +5572,7 @@
                     "type": "liberapay"
                 }
             ],
-            "time": "2021-05-10T12:14:39+00:00"
+            "time": "2021-05-18T00:34:40+00:00"
         },
         {
             "name": "orchestra/testbench-core",
@@ -5580,12 +5580,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/orchestral/testbench-core.git",
-                "reference": "c851a5b4ec14879641992e8959dd96761d1c2295"
+                "reference": "e20e4ed5586993940679119c4eeaed3b21037ac5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/orchestral/testbench-core/zipball/c851a5b4ec14879641992e8959dd96761d1c2295",
-                "reference": "c851a5b4ec14879641992e8959dd96761d1c2295",
+                "url": "https://api.github.com/repos/orchestral/testbench-core/zipball/e20e4ed5586993940679119c4eeaed3b21037ac5",
+                "reference": "e20e4ed5586993940679119c4eeaed3b21037ac5",
                 "shasum": ""
             },
             "require": {
@@ -5660,7 +5660,7 @@
                     "type": "liberapay"
                 }
             ],
-            "time": "2021-05-17T08:00:43+00:00"
+            "time": "2021-05-18T09:19:25+00:00"
         },
         {
             "name": "phar-io/manifest",
@@ -6329,12 +6329,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "3d0f17b1f0e1764dda0200cfac89d5f745e457cf"
+                "reference": "6e1d094b33df4bd79c0986327b5aa15757f79ded"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/3d0f17b1f0e1764dda0200cfac89d5f745e457cf",
-                "reference": "3d0f17b1f0e1764dda0200cfac89d5f745e457cf",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/6e1d094b33df4bd79c0986327b5aa15757f79ded",
+                "reference": "6e1d094b33df4bd79c0986327b5aa15757f79ded",
                 "shasum": ""
             },
             "require": {
@@ -6424,7 +6424,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-05-08T15:05:30+00:00"
+            "time": "2021-05-18T15:38:16+00:00"
         },
         {
             "name": "sebastian/cli-parser",

@@ -26,4 +26,7 @@ Route::name(LaraShop::adminName() . '.')->group(function () {
     // Settings
     Route::get('/setting', 'LarashopSettingController@index')->name('setting.index');
     Route::post('/setting', 'LarashopSettingController@store');
+
+    // Social
+    Route::resource('/social', 'LarashopSocialController');
 });
