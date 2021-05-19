@@ -3,8 +3,8 @@
 namespace CobraProjects\LaraShop\Http\Controllers\Admin;
 
 use CobraProjects\LaraShop\Models\LarashopBrand;
-use Illuminate\Routing\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
 
 class LarashopBrandController extends Controller
 {
@@ -30,8 +30,9 @@ class LarashopBrandController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'name' => 'required',
-            'slug' => 'required|unique:larashop_categories,slug',
+            'name'  => 'required',
+            'slug'  => 'required|unique:larashop_categories,slug',
+            'image' => 'required|image|mimes:jpeg,png,jpg',
         ]);
 
         $brand = LarashopBrand::create($data);
@@ -51,8 +52,9 @@ class LarashopBrandController extends Controller
     public function update(Request $request, LarashopBrand $brand)
     {
         $data = $request->validate([
-            'name' => 'required',
-            'slug' => 'required|unique:larashop_categories,slug,' . $brand->id,
+            'name'  => 'required',
+            'slug'  => 'required|unique:larashop_categories,slug,' . $brand->id,
+            'image' => 'required|image|mimes:jpeg,png,jpg',
         ]);
 
         $brand->update($data);
@@ -63,7 +65,6 @@ class LarashopBrandController extends Controller
 
         return back()->with('success', 'تم الحفظ بنجاح');
     }
-
 
     public function destroy(LarashopBrand $brand)
     {

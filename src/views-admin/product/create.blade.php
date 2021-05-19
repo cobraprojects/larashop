@@ -51,7 +51,7 @@
                                 <div class="form-group">
                                     <label for="image" class="form-control-label">صورة المنتج</label>
                                     <input type="file" class="form-control" id="image" name="image" />
-                                    @error('image'))
+                                    @error('image')
                                     <p class="text-danger">{{ $message }}</p>
                                     @enderror
                                 </div>
@@ -59,7 +59,7 @@
                                 <div class="form-group">
                                     <label for="images" class="form-control-label">صور اخرى</label>
                                     <input type="file" class="form-control" id="images" name="images[]" multiple />
-                                    @error('images'))
+                                    @error('images')
                                     <p class="text-danger">{{ $message }}</p>
                                     @enderror
                                 </div>
