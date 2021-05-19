@@ -39,7 +39,7 @@ class LaraShop
 
     public function getAllProducts()
     {
-        return Cache::remember('allProducts', 60 * 60 * 60 * 24, function () {
+        return Cache::rememberForever('allProducts', function () {
             return LarashopProduct::with(['media', 'parent'])->orderBy('id', 'DESC')->get();
         });
     }
@@ -176,7 +176,7 @@ class LaraShop
 
     private function setting(): LarashopSetting
     {
-        return Cache::remember('larashopSettings', 60 * 60 * 60 * 24, function () {
+        return Cache::rememberForever('larashopSettings', function () {
             return LarashopSetting::first() ?? new LarashopSetting();
         });
     }
