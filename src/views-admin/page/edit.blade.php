@@ -30,7 +30,7 @@
 
                         <div class="form-group">
                             <label for="slug" class="form-control-label">العنوان في الرابط <span class="text-danger">*</span> </label>
-                            <input type="text" class="form-control" id="slug" name="slug" value="{{ old('slug', $page->slug) }}" readonly />
+                            <input type="text" class="form-control" id="slug" name="slug" value="{{ old('slug', $page->slug) }}" />
                             <p class="small text-info text-right" style="direction: ltr">{{ config('app.url') }}/{{ config('larashop.frontend_prefix') }}/page/<span
                                     id="slug-text"></span> </p>
                             @error('slug')
