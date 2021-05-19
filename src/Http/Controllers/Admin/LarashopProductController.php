@@ -2,12 +2,12 @@
 
 namespace CobraProjects\LaraShop\Http\Controllers\Admin;
 
+use CobraProjects\LaraShop\Facades\LaraShop;
+use CobraProjects\LaraShop\Models\LarashopBrand;
+use CobraProjects\LaraShop\Models\LarashopProduct;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Cache;
-use CobraProjects\LaraShop\Facades\LaraShop;
-use CobraProjects\LaraShop\Models\LarashopProduct;
-use CobraProjects\LaraShop\Models\LarashopBrand;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class LarashopProductController extends Controller
@@ -29,28 +29,29 @@ class LarashopProductController extends Controller
     public function create()
     {
         $categories = LaraShop::getAllCategories();
-        $brands = LaraShopBrand::cursor();
-        $order = $categories->max('order') + 1;
+        $brands     = LaraShopBrand::cursor();
+        $order      = $categories->max('order') + 1;
         return view('multiauth::product.create', compact('categories', 'order', 'brands'));
     }
 
     public function store(Request $request)
     {
         $data = $request->validate([
-            'name' => 'required',
-            'slug' => 'required|unique:larashop_products,slug',
-            'description' => 'required',
-            'hidden' => 'nullable',
-            'categories' => 'required',
-            'hidden' => 'nullable',
-            'price' => 'required|numeric',
-            'old_price' => 'nullable|numeric',
-            'qty' => 'nullable|numeric',
-            'max_qty' => 'nullable|numeric',
-            'new' => 'nullable',
-            'featured' => 'nullable',
+            'name'         => 'required',
+            'slug'         => 'required|unique:larashop_products,slug',
+            'description'  => 'required',
+            'hidden'       => 'nullable',
+            'categories'   => 'required',
+            'hidden'       => 'nullable',
+            'price'        => 'required|numeric',
+            'old_price'    => 'nullable|numeric',
+            'qty'          => 'nullable|numeric',
+            'max_qty'      => 'nullable|numeric',
+            'new'          => 'nullable',
+            'featured'     => 'nullable',
             'has_discount' => 'nullable',
-            'brand_id' => 'nullable'
+            'brand_id'     => 'nullable',
+            'image'        => 'required|image|mimes:jpeg,png,jpg',
         ]);
 
         $product = LarashopProduct::create($data);
@@ -76,27 +77,28 @@ class LarashopProductController extends Controller
     public function edit(LarashopProduct $product)
     {
         $categories = LaraShop::getAllCategories();
-        $brands = LaraShopBrand::cursor();
+        $brands     = LaraShopBrand::cursor();
         return view('multiauth::product.edit', compact('categories', 'product', 'brands'));
     }
 
     public function update(Request $request, LarashopProduct $product)
     {
         $data = $request->validate([
-            'name' => 'required',
-            'slug' => 'required|unique:larashop_products,slug,' . $product->id,
-            'description' => 'required',
-            'hidden' => 'nullable',
-            'categories' => 'required',
-            'hidden' => 'nullable',
-            'price' => 'required|numeric',
-            'old_price' => 'nullable|numeric',
-            'qty' => 'nullable|numeric',
-            'max_qty' => 'nullable|numeric',
-            'new' => 'nullable',
-            'featured' => 'nullable',
+            'name'         => 'required',
+            'slug'         => 'required|unique:larashop_products,slug,' . $product->id,
+            'description'  => 'required',
+            'hidden'       => 'nullable',
+            'categories'   => 'required',
+            'hidden'       => 'nullable',
+            'price'        => 'required|numeric',
+            'old_price'    => 'nullable|numeric',
+            'qty'          => 'nullable|numeric',
+            'max_qty'      => 'nullable|numeric',
+            'new'          => 'nullable',
+            'featured'     => 'nullable',
             'has_discount' => 'nullable',
-            'brand_id' => 'nullable',
+            'brand_id'     => 'nullable',
+            'image'        => 'required|image|mimes:jpeg,png,jpg',
         ]);
 
         $product->update($data);
@@ -118,7 +120,6 @@ class LarashopProductController extends Controller
 
         return back()->with('success', 'تم الحفظ بنجاح');
     }
-
 
     public function destroy(LarashopProduct $product)
     {

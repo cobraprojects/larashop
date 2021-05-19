@@ -113,5 +113,13 @@
             </a>
         </li>
         @endpermitTo
+        @permitTo('ReadLarashopPage')
+        <li class="nav-item">
+            <a href="{{ route(LaraShop::adminName().'.page.index') }}" class="nav-link {{ $routeName->contains('page') ? 'active' : '' }}">
+                <i class="fa fa-link"></i>
+                <span>الصفحات الثابتة</span>
+            </a>
+        </li>
+        @endpermitTo
     </ul>
 </div><!-- kt-sideleft -->

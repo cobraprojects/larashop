@@ -29,4 +29,7 @@ Route::name(LaraShop::adminName() . '.')->group(function () {
 
     // Social
     Route::resource('/social', 'LarashopSocialController');
+
+    // Pages
+    Route::resource('/page', 'LarashopPageController');
 });
