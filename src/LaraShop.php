@@ -7,6 +7,7 @@ use CobraProjects\LaraShop\Models\LarashopProduct;
 use CobraProjects\LaraShop\Models\LarashopSetting;
 use CobraProjects\LaraShop\Models\LarashopSocial;
 use Gloudemans\Shoppingcart\Facades\Cart;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
 
 class LaraShop
@@ -38,7 +39,9 @@ class LaraShop
 
     public function getAllProducts()
     {
-        return LarashopProduct::with(['media', 'parent'])->orderBy('id', 'DESC')->get();
+        return Cache::remember('allProducts', 60 * 60 * 60 * 24, function () {
+            return LarashopProduct::with(['media', 'parent'])->orderBy('id', 'DESC')->get();
+        });
     }
 
     public function getCategoriesSelect($select = false, $parent = null, $level = 0)
@@ -173,7 +176,9 @@ class LaraShop
 
     private function setting(): LarashopSetting
     {
-        return LarashopSetting::first() ?? new LarashopSetting();
+        return Cache::remember('larashopSettings', 60 * 60 * 60 * 24, function () {
+            return LarashopSetting::first() ?? new LarashopSetting();
+        });
     }
 
     public function siteName()
