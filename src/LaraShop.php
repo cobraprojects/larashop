@@ -2,13 +2,12 @@
 
 namespace CobraProjects\LaraShop;
 
-use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Cache;
-use Gloudemans\Shoppingcart\Facades\Cart;
-use CobraProjects\LaraShop\Models\LarashopProduct;
 use CobraProjects\LaraShop\Models\LarashopCategory;
+use CobraProjects\LaraShop\Models\LarashopProduct;
 use CobraProjects\LaraShop\Models\LarashopSetting;
 use CobraProjects\LaraShop\Models\LarashopSocial;
+use Gloudemans\Shoppingcart\Facades\Cart;
+use Illuminate\Support\Str;
 
 class LaraShop
 {
@@ -39,9 +38,7 @@ class LaraShop
 
     public function getAllProducts()
     {
-        return Cache::rememberForever('allProducts', function () {
-            return LarashopProduct::with(['media', 'parent'])->orderBy('id', 'DESC')->get();
-        });
+        return LarashopProduct::with(['media', 'parent'])->orderBy('id', 'DESC')->get();
     }
 
     public function getCategoriesSelect($select = false, $parent = null, $level = 0)
@@ -82,7 +79,7 @@ class LaraShop
 
     public function getProductsInCategories(array $categories, $limit = 12)
     {
-        return LarashopProduct::where('hidden', 0)->whereHas('larashopCategories', fn ($q) => $q->whereIn('larashop_categories.id', $categories))->orderBy('id', 'DESC')->paginate($limit);
+        return LarashopProduct::where('hidden', 0)->whereHas('larashopCategories', fn($q) => $q->whereIn('larashop_categories.id', $categories))->orderBy('id', 'DESC')->paginate($limit);
     }
 
     public function getProductById($id)
@@ -102,14 +99,14 @@ class LaraShop
 
     public function moveToCart($rowId)
     {
-        $product =  Cart::get($rowId);
+        $product = Cart::get($rowId);
         $this->addToCart($product);
         $this->removefromWithList($rowId);
     }
 
     public function moveToWithList($rowId)
     {
-        $product =  Cart::get($rowId);
+        $product = Cart::get($rowId);
         $this->addToWishList($product);
         $this->removefromCart($rowId);
     }
@@ -167,7 +164,7 @@ class LaraShop
     public function cartLogin($user)
     {
         $user = config('auth.providers.users.model')::find($user);
-        $old = Cart::content();
+        $old  = Cart::content();
         Cart::restore($user->id);
         $old->merge(Cart::content());
         Cart::store($user->id);
@@ -176,9 +173,7 @@ class LaraShop
 
     private function setting(): LarashopSetting
     {
-        return Cache::rememberForever('larashopSettings', function () {
-            return LarashopSetting::first() ?? new LarashopSetting();
-        });
+        return LarashopSetting::first() ?? new LarashopSetting();
     }
 
     public function siteName()
