@@ -136,21 +136,18 @@ class LaraShop
 
     public function storeCart($user)
     {
-        $user = config('auth.providers.users.model')::find($user);
         Cart::store($user->id);
         Cart::Instance('wishlist')->store($user->id);
     }
 
     public function restoreCart($user)
     {
-        $user = config('auth.providers.users.model')::find($user);
         Cart::restore($user->id);
         Cart::Instance('wishlist')->restore($user->id);
     }
 
     public function deleteCart($user)
     {
-        $user = config('auth.providers.users.model')::find($user);
         Cart::erase($user->id);
     }
 
@@ -166,8 +163,7 @@ class LaraShop
 
     public function cartLogin($user)
     {
-        $user = config('auth.providers.users.model')::find($user);
-        $old  = Cart::content();
+        $old = Cart::content();
         Cart::restore($user->id);
         $old->merge(Cart::content());
         Cart::store($user->id);
