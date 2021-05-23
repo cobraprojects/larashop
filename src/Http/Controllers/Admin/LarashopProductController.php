@@ -83,6 +83,8 @@ class LarashopProductController extends Controller
 
     public function update(Request $request, LarashopProduct $product)
     {
+        $hasMainImage = ($product->media()->where('collection_name', 'main')->count());
+
         $data = $request->validate([
             'name'         => 'required',
             'slug'         => 'required|unique:larashop_products,slug,' . $product->id,
@@ -98,7 +100,7 @@ class LarashopProductController extends Controller
             'featured'     => 'nullable',
             'has_discount' => 'nullable',
             'brand_id'     => 'nullable',
-            'image'        => 'required|image|mimes:jpeg,png,jpg',
+            'image'        => $hasMainImage ? 'nullable|image|mimes:jpeg,png,jpg' : 'required|image|mimes:jpeg,png,jpg',
         ]);
 
         $product->update($data);
