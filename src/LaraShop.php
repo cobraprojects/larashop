@@ -219,7 +219,9 @@ class LaraShop
 
     public function social()
     {
-        return LarashopSocial::all();
+        return Cache::rememberForever('larashopSocial', function () {
+            return LarashopSocial::all();
+        });
     }
 
     public function socialIcon(LarashopSocial $larashopSocial)

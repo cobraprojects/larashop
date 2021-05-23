@@ -3,8 +3,9 @@
 namespace CobraProjects\LaraShop\Http\Controllers\Admin;
 
 use CobraProjects\LaraShop\Models\LarashopSocial;
-use Illuminate\Routing\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Cache;
 
 class LarashopSocialController extends Controller
 {
@@ -30,13 +31,15 @@ class LarashopSocialController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'name' => 'required',
-            'url' => 'required|url',
-            'icon_name' => 'required',
+            'name'       => 'required',
+            'url'        => 'required|url',
+            'icon_name'  => 'required',
             'icon_color' => 'nullable',
         ]);
 
-        $social = LarashopSocial::create($data);
+        LarashopSocial::create($data);
+
+        Cache::forget('larashopSocial');
 
         return back()->with('success', 'تم الحفظ بنجاح');
     }
@@ -49,17 +52,18 @@ class LarashopSocialController extends Controller
     public function update(Request $request, LarashopSocial $social)
     {
         $data = $request->validate([
-            'name' => 'required',
-            'url' => 'required|url',
-            'icon_name' => 'required',
+            'name'       => 'required',
+            'url'        => 'required|url',
+            'icon_name'  => 'required',
             'icon_color' => 'nullable',
         ]);
 
         $social->update($data);
 
+        Cache::forget('larashopSocial');
+
         return back()->with('success', 'تم الحفظ بنجاح');
     }
-
 
     public function destroy(LarashopSocial $social)
     {
