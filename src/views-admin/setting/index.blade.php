@@ -60,7 +60,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="country_name" class="form-control-label">اسم البلد</label>
+                            <label for="country_name" class="form-control-label">العنوان</label>
                             <input type="text" class="form-control" id="country_name" name="country_name" value="{{ old('country_name', $setting->country_name) }}" />
                             @error('country_name')
                             <p class="text-danger">{{ $message }}</p>
