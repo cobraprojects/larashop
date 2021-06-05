@@ -163,6 +163,13 @@ class LaraShop
 
     public function cartLogin($user)
     {
+        // remove non existent items from cart
+        foreach (Cart::content() as $key => $value) {
+            if (!LarashopProduct::find($value->model->id)) {
+                $this->removefromCart($key);
+            }
+        }
+
         $old = Cart::content();
         Cart::restore($user->id);
         $old->merge(Cart::content());
