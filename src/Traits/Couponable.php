@@ -15,4 +15,9 @@ trait Couponable
     {
         $this->coupons()->attach($coupon_id);
     }
+
+    public function hasUsedCoupon($coupon)
+    {
+        return $this->coupons->contains($coupon);
+    }
 }
